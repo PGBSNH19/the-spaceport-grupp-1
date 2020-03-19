@@ -40,5 +40,6 @@ namespace SpacePort
         double Withdraw(double amount);
         void Deposit(double amount);
         double CheckBalance();
+        
     }
 }

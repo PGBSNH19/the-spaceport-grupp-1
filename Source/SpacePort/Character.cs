@@ -11,12 +11,12 @@ namespace SpacePort
         public int SpaceShipID { get; set; }
 
         public Character(string name, decimal wallet, int spaceShipId) {
-            this.Name = name;
-            this.Wallet = wallet;
-            this.SpaceShipID = spaceShipId;
+            Name = name;
+            Wallet = wallet;
+            SpaceShipID = spaceShipId;
         }
 
-        public int PayParking()
+        public int Pay()
         {
 
         }
