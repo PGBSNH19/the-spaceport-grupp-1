@@ -8,7 +8,7 @@ namespace SpacePort
     {
         private bool isRunning;
 
-        public EngineComponent(bool isRunning)
+        public EngineComponent(bool isRunning = false)
         {
             this.isRunning = isRunning;
         }

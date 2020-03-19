@@ -7,19 +7,28 @@ namespace SpacePort
    public class SpaceShip
     {
         public string Name { get; set; }
-        public double Length { get; set; }
+        //public double Length { get; set; }
+        private readonly IEngineComponent engine;
+        private readonly IHullComponent passengerModule;
+        private readonly IEventLogger shipLog;
 
 
-         public SpaceShip(string name, double length)
+         public SpaceShip(string name, double length, int passengerCapacity)
          {
             Name = name;
-            Length = length;
-
-         } 
+            //Length = length;
+            engine = new EngineComponent();
+            passengerModule = new PassengerCarriageComponent
+            (
+                length, 
+                passengerCapacity
+            );
+            shipLog = new EventLogComponent();
+        } 
 
         public void Park()
         {
-           
+            engine.Stop();
         }
 
        public void IdentifyOwner()
@@ -41,12 +50,5 @@ namespace SpacePort
         {
 
         }
-
-
-
-
-
-
-
     }
 }
