@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SpacePort.EventLogComponents
+namespace SpacePort
 {
     public class EventLogComponent : IEventLogger
     {
         private List<string> log = new List<string>();
-
 
         public List<string> GetLog()
         {

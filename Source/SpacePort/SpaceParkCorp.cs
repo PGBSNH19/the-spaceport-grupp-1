@@ -6,7 +6,7 @@ namespace SpacePort
 {
     public class SpaceParkCorp
     {
-        private IAccountComponent CashRegister = new AccountComponent();
+        private IAccountComponent CashRegister = new CompanyAccount();
         private TicketBooth TBooth;
 
 
