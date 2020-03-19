@@ -17,7 +17,31 @@ namespace SpacePort
 
          } 
 
-      
+        public void Park()
+        {
+           
+        }
+
+       public void IdentifyOwner()
+        {
+            
+        }
+
+        public void Depart()
+        {
+
+        }
+
+        public void IsParked()
+        {
+
+        }
+
+        public void Communicate()
+        {
+
+        }
+
 
 
 

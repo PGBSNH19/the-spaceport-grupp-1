@@ -6,23 +6,24 @@ namespace SpacePort.EventLogComponents
 {
     public class EventLogComponent : IEventLogger
     {
+        private List<string> log = new List<string>();
 
 
         public List<string> GetLog()
         {
-            throw new NotImplementedException();
+            return log;
         }
 
         public string ReadEntry(int index)
         {
-            throw new NotImplementedException();
+            return log[index];
         }
 
         public void WriteToLog(string entry)
         {
-            throw new NotImplementedException();
+            log.Add(entry);
         }
 
-        //Hello!
+        
     }
 }
