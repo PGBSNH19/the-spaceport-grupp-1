@@ -34,12 +34,4 @@ namespace SpacePort
             return balance;
         }
     }
-
-    public interface IAccountComponent
-    {
-        double Withdraw(double amount);
-        void Deposit(double amount);
-        double CheckBalance();
-        
-    }
 }
