@@ -34,12 +34,5 @@ namespace SpacePort
         {
             return CashRegister.CheckBalance();
         } 
-
-
-
-
-
-
-
     }
 }
