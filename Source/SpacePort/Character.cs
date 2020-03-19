@@ -7,18 +7,30 @@ namespace SpacePort
     public class Character
     {
         public string Name { get; set; }
-        public decimal Wallet { get; set; }
+        //Ska egentligen ett skepp ha en passagerare som är karaktären?
         public int SpaceShipID { get; set; }
 
-        public Character(string name, decimal wallet, int spaceShipId) {
+        private readonly IAccountComponent wallet = new AccountComponent();
+
+        public Character(string name, int spaceShipId, double wallet) {
             Name = name;
-            Wallet = wallet;
+            this.wallet.Deposit(wallet);
             SpaceShipID = spaceShipId;
         }
 
-        public int Pay()
+        public double Pay(double amount)
         {
-            return 1;
+            return wallet.Withdraw(amount);
+        }
+
+        public void RecieveMoney(double amount)
+        {
+            wallet.Deposit(amount);
+        }
+
+        public double CheckWallet()
+        {
+            return wallet.CheckBalance();
         }
     }
 }
