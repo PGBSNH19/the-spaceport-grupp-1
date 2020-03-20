@@ -25,15 +25,14 @@ namespace SpacePort
 
         public override double Withdraw(double amount)
         {
-            if (CheckBalance() - amount < 0)
-            {
-                accountLog.WriteToLog($"Withdraw: Invalid amount ({amount}). Not enough funds.");
-                return 0;
-            }
-            else
-            {
-                return base.Withdraw(amount);
-            }        
+            //Code goes here..
+            return base.Withdraw(amount);
+        }
+
+        public override double CheckBalance()
+        {
+            //Code goes here...
+            return base.CheckBalance();
         }
     }
 }

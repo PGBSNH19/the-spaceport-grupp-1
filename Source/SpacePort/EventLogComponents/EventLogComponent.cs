@@ -21,6 +21,8 @@ namespace SpacePort
         public void WriteToLog(string entry)
         {
             log.Add(entry);
-        }        
+        }
+
+        
     }
 }

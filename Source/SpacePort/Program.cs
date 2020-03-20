@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace SpacePort
 {
@@ -6,9 +9,15 @@ namespace SpacePort
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Hello World!");
-            SpaceShip s = new SpaceShip("name", 120, 1);
-            s.ShipLength();
+            API_Caller data = new API_Caller();
+            
+            var c = data.GetCharacter();
+            Console.WriteLine(c.results[0].name);
+     
+
+
         }
     }
 }
