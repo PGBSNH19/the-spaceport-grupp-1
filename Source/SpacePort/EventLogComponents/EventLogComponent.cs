@@ -13,11 +13,6 @@ namespace SpacePort
             return log;
         }
 
-        public string ReadEntry(int index)
-        {
-            return log[index];
-        }
-
         public void WriteToLog(string entry)
         {
             log.Add(entry);

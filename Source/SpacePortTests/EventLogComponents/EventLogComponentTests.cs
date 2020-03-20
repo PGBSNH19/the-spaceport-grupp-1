@@ -19,5 +19,15 @@ namespace SpacePort.Tests
 
             Assert.IsNotNull(logCopy);
         }
+
+        [TestMethod()]
+        public void WriteToLogTest_AddEntry_GetEntry()
+        {
+            string entry = "testdata";
+            EventLogComponent eventLog = new EventLogComponent();
+            eventLog.WriteToLog(entry);
+
+            Assert.AreEqual(entry, eventLog.GetLog()[0]);
+        }
     }
 }
