@@ -24,14 +24,14 @@ namespace SpacePort
                 passengerCapacity
             );
             shipLog = new EventLogComponent();
-        } 
+         } 
 
         public void Park()
         {
             engine.Stop();
         }
 
-       public void IdentifyOwner()
+        public void IdentifyOwner()
         {
             
         }
@@ -49,6 +49,11 @@ namespace SpacePort
         public void Communicate()
         {
 
+        }
+
+        public double ShipLength()
+        {
+            return passengerModule.GetLength();
         }
     }
 }
