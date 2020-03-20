@@ -10,7 +10,7 @@ namespace SpacePort
 
         private readonly IEngineComponent engine;
         private readonly IEventLogComponent shipLog;
-        private readonly IHullComponent passengerModule;
+        private readonly PassengerCarriageComponent passengerModule;
 
         public SpaceShip(string name, double length, int passengerCapacity)
         {
@@ -20,7 +20,86 @@ namespace SpacePort
             passengerModule = new PassengerCarriageComponent(length, passengerCapacity);
         }
 
+        public void StartEngine()
+        {
+            engine.Start();
+            shipLog.WriteToLog("Engine fired up!");
+        }
 
+        public void StopEngine()
+        {
+            engine.Stop();
+            shipLog.WriteToLog("Engine powered down.");
+        }
+
+        public bool IsEngineOn()
+        {
+            return engine.IsRunning();
+        }
+
+        public void AddLogEntry(string message)
+        {
+            shipLog.WriteToLog(message);
+        }
+
+        public List<string> GetShipLog()
+        {
+            return shipLog.GetLog();
+        }
+
+        public bool AddPassenger(Character passenger)
+        {
+            bool passengerBoarded = passengerModule.Embark(passenger);
+            if (passengerBoarded)
+            {
+                shipLog.WriteToLog($"{passenger.Name} boarded ship.");
+                return true;
+            }
+
+            shipLog.WriteToLog($"{passenger.Name} cannot board because ship is at full capacity.");
+            return false;            
+        }
+
+        public bool RemovePassenger(Character passenger)
+        {
+            bool passengerDisembarked = passengerModule.Disembark(passenger);
+            if (passengerDisembarked)
+            {
+                shipLog.WriteToLog($"{passenger.Name} disembarked ship.");
+                return true;
+            }
+
+            shipLog.WriteToLog($"There's noone named {passenger.Name} onboard.");
+            return false;
+        }
+
+        public bool RemovePassenger(string passengerName)
+        {
+            bool passengerDisembarked = passengerModule.Disembark(passengerName);
+            if (passengerDisembarked)
+            {
+                shipLog.WriteToLog($"{passengerName} disembarked ship.");
+                return true;
+            }
+
+            shipLog.WriteToLog($"There's no-one named {passengerName} on-board.");
+            return false;
+        }
+
+        public int PassengerCapacity()
+        {
+            return passengerModule.Capacity;
+        }
+
+        public int PassengerCount()
+        {
+            return passengerModule.Passengers.Count;
+        }
+
+        public List<Character> PassengerList()
+        {
+            return passengerModule.Passengers;
+        }
     }
 }
 

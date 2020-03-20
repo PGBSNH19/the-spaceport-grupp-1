@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SpacePort
 {
-    public class HullComponent : IHullComponent
+    public abstract class HullComponent : IHullComponent
     {
         private readonly double length;
 

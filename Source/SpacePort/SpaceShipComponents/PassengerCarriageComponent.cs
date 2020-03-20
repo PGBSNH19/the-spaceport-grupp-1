@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
 
 namespace SpacePort
 {
@@ -15,22 +14,41 @@ namespace SpacePort
             this.Capacity = capacity;
         }
 
-        public void Embark(Character person)
+        public bool Embark(Character person)
         {
             if (Passengers.Count < Capacity)
             {
                 Passengers.Add(person);
+                return true;
             }
+
+            return false;
         }
 
-        public void Disembark(Character person)
+        public bool Disembark(Character person)
         {
+            int passengerCount = Passengers.Count;
             Passengers.Remove(Passengers.Find(p => p == person));
+
+            if (passengerCount != Passengers.Count)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public void Disembark(string name)
+        public bool Disembark(string name)
         {
+            int passengerCount = Passengers.Count;
             Passengers.Remove(Passengers.Find(p => p.Name == name));
+
+            if (passengerCount != Passengers.Count)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
