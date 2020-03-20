@@ -25,9 +25,9 @@ namespace SpacePort
             CashRegister.Deposit(amount);
         }
 
-        public double Withdraw(double amount)
+        public void Withdraw(double amount)
         {
-            return CashRegister.Withdraw(amount);
+            CashRegister.Withdraw(amount);
         }
 
         public double CheckBalance()

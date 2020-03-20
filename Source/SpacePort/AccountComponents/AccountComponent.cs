@@ -10,23 +10,30 @@ namespace SpacePort
 
         public AccountComponent (double balance = 0)
         {
+            if(balance > 0)
+            {
             this.balance = balance;
+
+            }
+            else
+            {
+                this.balance = 0;
+            }
         }
 
         public virtual double Withdraw(double amount)
         {
-            if (balance < amount)
+            if (amount > 0 && balance - amount >= 0)
             {
-                return 0;
+                balance -= amount;
+                return amount;
             }
-
-            balance -= amount;
-            return amount;
+            return 0;
         }
 
         public virtual void Deposit(double amount)
         {
-            balance += amount;
+            balance =+ amount;
         }
 
         public virtual double CheckBalance()

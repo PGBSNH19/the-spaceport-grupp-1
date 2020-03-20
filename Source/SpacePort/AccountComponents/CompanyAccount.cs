@@ -12,7 +12,7 @@ namespace SpacePort
 
         public override void Deposit(double amount)
         {
-            if (amount < 1)
+            if (amount > 0)
             {
                 base.Deposit(amount);
                 accountLog.WriteToLog($"Deposit: {amount}.");
@@ -25,13 +25,11 @@ namespace SpacePort
 
         public override double Withdraw(double amount)
         {
-            //Code goes here..
             return base.Withdraw(amount);
         }
 
         public override double CheckBalance()
         {
-            //Code goes here...
             return base.CheckBalance();
         }
     }
