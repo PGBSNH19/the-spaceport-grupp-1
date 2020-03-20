@@ -59,8 +59,8 @@ namespace SpacePort.Tests
             AccountComponent account = new AccountComponent(amount);
             account.Deposit(depositAmount);
 
-            Assert.AreEqual(amount , account.CheckBalance());
-            
+            Assert.AreEqual(amount, account.CheckBalance());
+
         }
 
         [TestMethod()]
@@ -75,7 +75,13 @@ namespace SpacePort.Tests
 
         }
 
+        [TestMethod()]
+        public void CheckBalanceTest_ReturnBalance()
+        {
+            double amount = 100;
+            AccountComponent account = new AccountComponent(amount);
 
-
+            Assert.AreEqual(amount, account.CheckBalance());
+        }
     }
 }
