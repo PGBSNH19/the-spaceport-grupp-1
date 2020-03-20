@@ -19,6 +19,29 @@ namespace SpacePort.Tests
             Assert.IsTrue(parking.IsOccupied());
         }
 
+        [TestMethod()]
+        public void ParkTest_IsOccupiedSetsToFalse_False()
+        {
+            ParkingSpaceComponent parking = new ParkingSpaceComponent();
+
+            parking.Depart();
+
+            Assert.IsFalse(parking.IsOccupied());
+        }
+
+
+        [TestMethod()]
+        public void ParkTest_IsOccupiedStatus_()
+        {
+            ParkingSpaceComponent parking = new ParkingSpaceComponent();
+
+           
+
+            Assert.IsNotNull(parking.IsOccupied());
+        }
+
+
+
 
     }
 }
