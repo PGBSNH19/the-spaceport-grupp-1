@@ -17,11 +17,19 @@ namespace SpacePort.Tests
         }
 
         [TestMethod()]
-        public void StartTest_EngineIsRunning_True()
+        public void StartTest_StartEngine_IsRunningTrue()
         {
             EngineComponent engine = new EngineComponent();
             engine.Start();
             Assert.IsTrue(engine.IsRunning());
+        }
+
+        [TestMethod()]
+        public void StopTest_StopEngine_IsRunningFalse()
+        {
+            EngineComponent engine = new EngineComponent();
+            engine.Stop();
+            Assert.IsFalse(engine.IsRunning());
         }
     }
 

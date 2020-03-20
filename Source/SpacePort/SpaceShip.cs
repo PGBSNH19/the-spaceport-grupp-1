@@ -4,43 +4,23 @@ using System.Text;
 
 namespace SpacePort
 {
-   public class SpaceShip
+    public class SpaceShip
     {
         public string Name { get; set; }
-        public double Length { get; set; }
 
-         public SpaceShip(string name, double length)
-         {
+        private readonly IEngineComponent engine;
+        private readonly IEventLogComponent shipLog;
+        private readonly IHullComponent passengerModule;
+
+        public SpaceShip(string name, double length, int passengerCapacity)
+        {
             Name = name;
-            Length = length;
-
-         } 
-
-        public void Park()
-        {
-           
+            engine = new EngineComponent();
+            shipLog = new EventLogComponent();
+            passengerModule = new PassengerCarriageComponent(length, passengerCapacity);
         }
 
-       public void IdentifyOwner()
-        {
-            
-        }
 
-        public void Depart()
-        {
-
-        }
-
-        public void IsParked()
-        {
-
-        }
-
-        public void Communicate()
-        {
-
-        }
-        
-            
     }
 }
+

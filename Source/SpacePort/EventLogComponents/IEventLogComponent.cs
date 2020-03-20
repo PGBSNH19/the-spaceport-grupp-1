@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SpacePort
 {
-    public interface IEventLogger
+    public interface IEventLogComponent
     {
         void WriteToLog(string entry);
         List<string> GetLog();

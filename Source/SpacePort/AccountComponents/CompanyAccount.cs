@@ -6,7 +6,7 @@ namespace SpacePort
 {
     public class CompanyAccount : AccountComponent
     {
-        private IEventLogger accountLog = new EventLogComponent();
+        private IEventLogComponent accountLog = new EventLogComponent();
         
         public CompanyAccount(double amount = 0) : base(amount) { }
 
