@@ -33,7 +33,12 @@ namespace SpacePort
 
         public virtual void Deposit(double amount)
         {
-            balance =+ amount;
+            if (amount>0)
+            {
+                balance +=amount;
+            }
+
+            
         }
 
         public virtual double CheckBalance()
