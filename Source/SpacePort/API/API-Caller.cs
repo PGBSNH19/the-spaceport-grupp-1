@@ -9,13 +9,12 @@ using SpacePort.API;
 
 namespace SpacePort
 {
-    public class API_Caller
+    public class APICaller
     {
         private static RestClient client =  new RestClient("https://swapi.co/api/");
-        
         public CharacterInformationRoot GetCharacter(string search = "")
         {
-            var request = new RestRequest("people/", DataFormat.Json);
+            var request = new RestRequest("people/?search=", DataFormat.Json);
             var response = client.Get<CharacterInformationRoot>(request);
             
             return response.Data;
