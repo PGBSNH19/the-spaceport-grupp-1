@@ -14,14 +14,14 @@ namespace SpacePort
         private static RestClient client =  new RestClient("https://swapi.co/api/");
         public CharacterInformationRoot GetCharacter(string search = "")
         {
-            var request = new RestRequest("people/?search=", DataFormat.Json);
+            var request = new RestRequest("people/?search=" + search, DataFormat.Json);
             var response = client.Get<CharacterInformationRoot>(request);
             
             return response.Data;
         }
         public SpaceshipInformationRoot GetSpaceship(string search = "")
         {
-            var request = new RestRequest("starships/", DataFormat.Json);
+            var request = new RestRequest("starships/?search=" + search, DataFormat.Json);
             var response = client.Get<SpaceshipInformationRoot>(request);
 
             return response.Data;

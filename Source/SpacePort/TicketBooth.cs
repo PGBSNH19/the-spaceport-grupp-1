@@ -9,14 +9,20 @@ namespace SpacePort
     {
         private readonly IParkingSpaceComponent[] parkingSpaces;
         private readonly APICaller apiCaller;
-        public bool IsAllowedToPark()
+        public bool IsAllowedToPark(Character person, SpaceShip spaceShip)
         {
-            return false;
+            if (NumberOfFreeParkingSpaces() <= 0)
+            {
+                return false;
+            }
+            var CharacterInformation = apiCaller.GetCharacter(person.Name) == ;
         }
         public int NumberOfFreeParkingSpaces()
         {
             return parkingSpaces.Where(p => p.IsOccupied() == false).Count(); ;
         }
+
+
     }
 
 }
