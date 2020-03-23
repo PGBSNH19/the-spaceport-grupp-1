@@ -10,6 +10,7 @@ namespace SpacePort
     {
         static void Main(string[] args)
         {
+            System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             List<SpaceShip> spaceShips = new List<SpaceShip>();
             
             APICaller data = new APICaller();
@@ -17,8 +18,8 @@ namespace SpacePort
 
 
             var ship = data.GetSpaceship("falcon");
-            Console.WriteLine(ship.results[0].passengers);
-            spaceShips.Add(new SpaceShip(ship.results[0].name, double.Parse(ship.results[0].length), int.Parse(ship.results[0].passengers)));
+            Console.WriteLine(Convert.ToDouble(ship.results[0].length));
+            spaceShips.Add(new SpaceShip(ship.results[0].name, Convert.ToDouble(ship.results[0].length), int.Parse(ship.results[0].passengers)));
 
             Console.ReadKey();
             
