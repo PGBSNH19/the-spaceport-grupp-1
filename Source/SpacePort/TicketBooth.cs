@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using SpacePort.API;
 
 namespace SpacePort
 {
@@ -9,13 +10,19 @@ namespace SpacePort
     {
         private readonly IParkingSpaceComponent[] parkingSpaces;
         private readonly APICaller apiCaller;
-        public bool IsAllowedToPark(Character person, SpaceShip spaceShip)
+
+        public bool IsAllowedToPark(Character person, SpaceshipInformation spaceShip)
         {
+
             if (NumberOfFreeParkingSpaces() <= 0)
             {
                 return false;
             }
-            var CharacterInformation = apiCaller.GetCharacter(person.Name) == ;
+
+            var SpaceShipInformation = apiCaller.GetSpaceship(spaceShip.Name);
+            var CharacterInformation = apiCaller.GetCharacter(person.Name);
+
+            return CharacterInformation.results.Any() && SpaceShipInformation.results.Any();
         }
         public int NumberOfFreeParkingSpaces()
         {
