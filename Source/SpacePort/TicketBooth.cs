@@ -11,7 +11,7 @@ namespace SpacePort
         private readonly IParkingSpaceComponent[] parkingSpaces;
         private readonly APICaller apiCaller;
 
-        public bool IsAllowedToPark(Character person, string shipName)
+        public bool IsAllowedToPark(Character person, SpaceshipInformation spaceShip)
         {
 
             if (NumberOfFreeParkingSpaces() <= 0)
@@ -19,10 +19,10 @@ namespace SpacePort
                 return false;
             }
 
-            var SpaceShipInformation = apiCaller.GetSpaceship(shipName);
-            var CharacterInformation = apiCaller.GetCharacter(person.Name);
+            
+            var characterInformation = apiCaller.GetCharacter(person.Name);
 
-            return CharacterInformation.results.Any() && SpaceShipInformation.results.Any();
+            return characterInformation.results.Any(c => c.name == person.Name) && double.Parse(spaceShip.length) <= 120000;
         }
         public int NumberOfFreeParkingSpaces()
         {
