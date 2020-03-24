@@ -27,7 +27,7 @@ namespace SpacePort
             
             var characterInformation = apiCaller.GetCharacter(person.Name);
 
-            return characterInformation.results.Any(c => c.name == person.Name) && double.Parse(spaceShip.length) <= 120000;
+            return characterInformation.results.Any(c => c.name == person.Name) && spaceShip.GetShipLength() <= 120000;
         }
         public int NumberOfFreeParkingSpaces()
         {

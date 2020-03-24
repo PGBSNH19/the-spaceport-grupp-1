@@ -4,52 +4,49 @@ using System.Text;
 
 namespace SpacePort
 {
-    public class SpaceShipObjectBuilder : IStart, IAddComponents
+    public class SpaceShipObjectBuilder : IAddComponents
     {
         private string name;
         private EngineComponent engine;
         private EventLogComponent shipLog;
         private PassengerCarriageComponent passengerModule;
 
-        public int MyProperty { get; set; }
-
-        public static IStart Start() => new SpaceShipObjectBuilder();
-        public SpaceShipObjectBuilder NameShip()
+        public SpaceShipObjectBuilder(string name)
         {
+            this.name = name;
+        }
+
+        public static IAddComponents ShipName(string name) => new SpaceShipObjectBuilder(name);
+
+        public IAddComponents AddEngine(EngineComponent engine)
+        {
+            this.engine = engine;
             return this;
         }
 
-        public IAddComponents AddEngine()
+        public IAddComponents AddPassengerModule(PassengerCarriageComponent passengerModule)
         {
+            this.passengerModule = passengerModule;
             return this;
         }
 
-        public IAddComponents AddPassengerModule()
+        public IAddComponents AddShipLog(EventLogComponent shipLog)
         {
-            return this;
-        }
-
-        public IAddComponents AddShipLog()
-        {
+            this.shipLog = shipLog;
             return this;
         }
 
         public SpaceShip BuildShip()
         {
-            //return new SpaceShip;
+            return new SpaceShip(this.name, this.engine, this.shipLog, this.passengerModule);
         }
-    }
-
-    public interface IStart
-    {
-        SpaceShipObjectBuilder NameShip();
     }
 
     public interface IAddComponents
     {
-        IAddComponents AddEngine();
-        IAddComponents AddShipLog();
-        IAddComponents AddPassengerModule();
+        IAddComponents AddEngine(EngineComponent engine);
+        IAddComponents AddShipLog(EventLogComponent shipLog);
+        IAddComponents AddPassengerModule(PassengerCarriageComponent passengerModule);
         SpaceShip BuildShip();
     }
 

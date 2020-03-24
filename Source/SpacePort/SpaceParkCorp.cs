@@ -40,7 +40,7 @@ namespace SpacePort
         public bool IsAllowedToPark(Character person, SpaceshipInformation spaceship)
         {
 
-            return ticketBooth.IsAllowedToPark(person, spaceship);
+            return true;
         }
         public int NumberOfFreeParkingSpaces()
         {

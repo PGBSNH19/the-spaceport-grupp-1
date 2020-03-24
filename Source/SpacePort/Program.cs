@@ -16,14 +16,6 @@ namespace SpacePort
             APICaller data = new APICaller();
             SpaceParkCorp s = new SpaceParkCorp();
 
-
-            var ship = data.GetSpaceship("falcon");
-            spaceShips.Add(new SpaceShip(ship.results[0].name, Convert.ToDouble(ship.results[0].length), int.Parse(ship.results[0].passengers)));
-            ship = data.GetSpaceship("destroyer");
-            Console.WriteLine(ship.results[0].name);
-            spaceShips.Add(new SpaceShip(ship.results[0].name, Convert.ToDouble(ship.results[0].length), int.Parse(ship.results[0].passengers)));
-            spaceShips.Add(new SpaceShip(ship.results[1].name, Convert.ToDouble(ship.results[1].length), int.Parse(ship.results[1].passengers)));
-
             var c = data.GetCharacter("luke");
             characters.Add(new Character(c.results[0].name, (2000.0m), 1));
 
@@ -32,7 +24,14 @@ namespace SpacePort
 
             characters.Add(new Character("Olle", (2000.0m), 3));
 
-            SpaceShipObjectBuilder.Start().NameShip
+            SpaceShip falcon = SpaceShipObjectBuilder
+                .ShipName("Falcon")
+                .AddEngine(new EngineComponent())
+                .AddShipLog(new EventLogComponent())
+                .AddPassengerModule(new PassengerCarriageComponent(111111, 6))
+                .BuildShip();
+
+
             
             
         }

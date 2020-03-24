@@ -100,6 +100,11 @@ namespace SpacePort
         {
             return passengerModule.Passengers;
         }
+
+        public double GetShipLength()
+        {
+            return passengerModule.GetLength();
+        }
     }
 }
 
