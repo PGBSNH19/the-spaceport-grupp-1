@@ -16,19 +16,19 @@ namespace SpacePort
             this.parkingSpaces = parkingSpaces;
             apiCaller = new ApiFetchData();
         }
-        public bool IsAllowedToPark(Person person, SpaceShip spaceShip)
-        {
+        //public bool IsAllowedToPark(Person person, SpaceShip spaceShip)
+        //{
 
-            if (NumberOfFreeParkingSpaces() <= 0)
-            {
-                return false;
-            }
+        //    if (NumberOfFreeParkingSpaces() <= 0)
+        //    {
+        //        return false;
+        //    }
 
             
-            var characterInformation = apiCaller.GetPerson(person.Name);
+        //    var characterInformation = apiCaller.GetPerson(person.Name);
 
-            return characterInformation.results.Any(c => c.name == person.Name) && spaceShip.GetShipLength() <= 120000;
-        }
+        //    return characterInformation.results.Any(c => c.name == person.Name) && spaceShip.GetShipLength() <= 120000;
+        //}
         public int NumberOfFreeParkingSpaces()
         {
             return parkingSpaces.Where(p => p.IsOccupied() == false).Count(); ;
