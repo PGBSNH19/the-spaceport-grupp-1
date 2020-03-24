@@ -24,7 +24,6 @@ namespace SpacePort.API
         public DateTime created { get; set; }
         public DateTime edited { get; set; }
         public string url { get; set; }
-
     }
 
     public class SpaceshipInformationRoot
@@ -34,6 +33,4 @@ namespace SpacePort.API
         public object previous { get; set; }
         public List<SpaceshipInformation> results { get; set; }
     }
-
-
 }
