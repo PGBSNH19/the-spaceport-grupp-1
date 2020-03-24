@@ -32,9 +32,8 @@ namespace SpacePort
 
             characters.Add(new Character("Olle", (2000.0m), 3));
 
+            SpaceShipObjectBuilder.Start().NameShip
             
-
-            Console.ReadKey();
             
         }
     }
