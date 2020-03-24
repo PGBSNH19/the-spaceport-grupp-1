@@ -6,29 +6,39 @@ namespace SpacePort
 {
     public class SpaceShipObjectBuilder : IStart, IAddComponents
     {
+        private string name;
+        private EngineComponent engine;
+        private EventLogComponent shipLog;
+        private PassengerCarriageComponent passengerModule;
+
+        public int MyProperty { get; set; }
+        public SpaceShipObjectBuilder()
+        {
+
+        }
         public IAddComponents NameShip()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public IAddComponents AddEngine()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public IAddComponents AddPassengerModule()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public IAddComponents AddShipLog()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public SpaceShip BuildShip()
         {
-            throw new NotImplementedException();
+            return new SpaceShip;
         }
     }
 
