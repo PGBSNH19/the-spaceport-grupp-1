@@ -12,11 +12,9 @@ namespace SpacePort
         private PassengerCarriageComponent passengerModule;
 
         public int MyProperty { get; set; }
-        public SpaceShipObjectBuilder()
-        {
 
-        }
-        public IAddComponents NameShip()
+        public static IStart Start() => new SpaceShipObjectBuilder();
+        public SpaceShipObjectBuilder NameShip()
         {
             return this;
         }
@@ -38,13 +36,13 @@ namespace SpacePort
 
         public SpaceShip BuildShip()
         {
-            return new SpaceShip;
+            //return new SpaceShip;
         }
     }
 
     public interface IStart
     {
-        IAddComponents NameShip();
+        SpaceShipObjectBuilder NameShip();
     }
 
     public interface IAddComponents
