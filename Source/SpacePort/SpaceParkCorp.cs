@@ -7,9 +7,14 @@ namespace SpacePort
 {
     public class SpaceParkCorp
     {
-        private IAccountComponent CashRegister = new CompanyAccount();
+        private IAccountComponent cashRegister;
         private TicketBooth ticketBooth;
 
+        public SpaceParkCorp(IAccountComponent cashRegister, TicketBooth ticketBooth)
+        {
+            this.cashRegister = cashRegister;
+            this.ticketBooth = new TicketBooth(19);
+        }
 
         public int Fee()
         {
@@ -23,24 +28,24 @@ namespace SpacePort
 
         public void Deposit(double amount) 
         {
-            CashRegister.Deposit(amount);
+            cashRegister.Deposit(amount);
         }
 
         public void Withdraw(double amount)
         {
-            CashRegister.Withdraw(amount);
+            cashRegister.Withdraw(amount);
         }
 
         public double CheckBalance()
         {
-            return CashRegister.CheckBalance();
+            return cashRegister.CheckBalance();
         }
 
 
-        public bool IsAllowedToPark(Person person, SpaceshipData spaceship)
+        public bool IsAllowedToPark(Person person, SpaceShip spaceship)
         {
 
-            return true;
+            return ticketBooth.IsAllowedToPark(person, spaceship);
         }
         public int NumberOfFreeParkingSpaces()
         {

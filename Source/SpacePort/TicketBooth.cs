@@ -8,13 +8,17 @@ namespace SpacePort
 {
     public class TicketBooth
     {
-        private readonly IParkingSpaceComponent[] parkingSpaces;
+        private IParkingSpaceComponent[] parkingSpaces;
         private readonly ApiFetchData apiCaller;
 
-        public TicketBooth(IParkingSpaceComponent[] parkingSpaces)
+        public TicketBooth(int parkingSpaces)
         {
-            this.parkingSpaces = parkingSpaces;
-            apiCaller = new ApiFetchData();
+            this.parkingSpaces = new IParkingSpaceComponent[parkingSpaces];
+            this.apiCaller = new ApiFetchData();
+            for (int i = 0; i < this.parkingSpaces.Length; i++)
+            {
+                this.parkingSpaces[i] = new ParkingSpaceComponent();
+            }
         }
         public bool IsAllowedToPark(Person person, SpaceShip spaceShip)
         {
@@ -24,12 +28,13 @@ namespace SpacePort
                 return false;
             }
 
-            return true;
+
+            return apiCaller.GetPerson(person.Name).name != null && spaceShip.GetShipLength() <= 120000;
         }
 
         public int NumberOfFreeParkingSpaces()
         {
-            return parkingSpaces.Where(p => p.IsOccupied() == false).Count(); ;
+            return parkingSpaces.Where(p => p.IsOccupied() == false).Count();
         }
 
 
