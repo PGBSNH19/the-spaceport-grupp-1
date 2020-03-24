@@ -14,6 +14,19 @@ namespace SpacePort
         {
             this.name = name;
         }
+
+        public static Person BuildFromApi(int id)
+        {
+            ApiFetchData data = new ApiFetchData();
+            var PersonData = data.GetPerson(id);
+
+            return PersonObjectBuilder
+                .AddName(PersonData.name)
+                .AddWallet(200.5)
+                .AddSpaceShipID(1)
+                .BuildPerson();
+        }
+
         public static IAddFeatures AddName(string name) => new PersonObjectBuilder(name);
 
         public IAddFeatures AddWallet(double wallet)

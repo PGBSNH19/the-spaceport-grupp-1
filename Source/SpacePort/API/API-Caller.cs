@@ -57,6 +57,20 @@ namespace SpacePort
             return data.results[0];
         }
 
+        public PersonData GetPerson(int index)
+        {
+            var dataResponse = GetPersonResponse(index);
+
+            return JsonConvert.DeserializeObject<PersonData>(dataResponse.Result.Content);
+        }
+
+        public PersonData GetPerson(string search)
+        {
+            var dataResponse = GetPersonResponse(search);
+            var data = JsonConvert.DeserializeObject<PersonDataRoot>(dataResponse.Result.Content);
+            return data.results[0];
+        }
+
     }
     
 }

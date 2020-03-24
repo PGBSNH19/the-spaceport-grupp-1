@@ -17,37 +17,19 @@ namespace SpacePort
             ApiFetchData data = new ApiFetchData();
             SpaceParkCorp s = new SpaceParkCorp();
 
-            //var c = data.GetPerson("luke");
-            //characters.Add(new Person(c.results[0].name, (2000), 1));
-
-            //c = data.GetPerson("yoda");
-            //characters.Add(new Person(c.results[0].name, (2000), 2));
-
-            //characters.Add(new Person("Olle", (2000), 3));
-
             SpaceShip falcon = SpaceShipObjectBuilder.BuildFromApi("destroyer");
             SpaceShip falcon2 = SpaceShipObjectBuilder.BuildFromApi(9);
             SpaceShip falcon3 = SpaceShipObjectBuilder.BuildFromApi(10);
             SpaceShip falcon4 = SpaceShipObjectBuilder.BuildFromApi(9);
-            Console.WriteLine(falcon4);
-            Console.WriteLine("a");
+
+            falcon.AddPassenger(PersonObjectBuilder.BuildFromApi(1));
+
+            Console.WriteLine(falcon.PassengerList()[0].Name);
 
             
             ApiFetchData apiFetch = new ApiFetchData();
 
-           
-
-            //Person babyyoda = PersonObjectBuilder
-            //    .AddName(personData.name)
-            //    .AddSpaceShipID(1)
-            //    .AddWallet(100)
-            //    .BuildPerson();
-
-
-            
             Console.ReadKey();
-            
-            
         }
     }
 }
