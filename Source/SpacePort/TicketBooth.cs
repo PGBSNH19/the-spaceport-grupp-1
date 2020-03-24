@@ -16,7 +16,7 @@ namespace SpacePort
             this.parkingSpaces = parkingSpaces;
             apiCaller = new APICaller();
         }
-        public bool IsAllowedToPark(Character person, SpaceShip spaceShip)
+        public bool IsAllowedToPark(Person person, SpaceShip spaceShip)
         {
 
             if (NumberOfFreeParkingSpaces() <= 0)

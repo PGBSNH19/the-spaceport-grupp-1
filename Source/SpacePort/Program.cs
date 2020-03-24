@@ -12,17 +12,17 @@ namespace SpacePort
         {
             System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             List<SpaceShip> spaceShips = new List<SpaceShip>();
-            List<Character> characters = new List<Character>();
+            List<Person> characters = new List<Person>();
             APICaller data = new APICaller();
             SpaceParkCorp s = new SpaceParkCorp();
 
             var c = data.GetCharacter("luke");
-            characters.Add(new Character(c.results[0].name, (2000.0m), 1));
+            characters.Add(new Person(c.results[0].name, (2000), 1));
 
             c = data.GetCharacter("yoda");
-            characters.Add(new Character(c.results[0].name, (2000.0m), 2));
+            characters.Add(new Person(c.results[0].name, (2000), 2));
 
-            characters.Add(new Character("Olle", (2000.0m), 3));
+            characters.Add(new Person("Olle", (2000), 3));
 
             SpaceShip falcon = SpaceShipObjectBuilder
                 .ShipName("Falcon")
@@ -31,7 +31,14 @@ namespace SpacePort
                 .AddPassengerModule(new PassengerCarriageComponent(111111, 6))
                 .BuildShip();
 
+            Person babyyoda = PersonObjectBuilder
+                .AddName("Yoda")
+                .AddSpaceShipID(1)
+                .AddWallet(100)
+                .BuildPerson();
 
+            Console.WriteLine(falcon);
+            Console.ReadKey();
             
             
         }

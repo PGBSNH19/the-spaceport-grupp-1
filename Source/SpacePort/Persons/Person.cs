@@ -4,12 +4,12 @@ using System.Text;
 
 namespace SpacePort
 {
-    public class Character
+    public class Person
     {
         public string Name { get; set; }
-        public decimal Wallet { get; set; }
+        public double Wallet { get; set; }
         public int SpaceShipID { get; set; }
-        public Character(string name, decimal wallet, int spaceShipId) {
+        public Person(string name, double wallet, int spaceShipId) {
             Name = name;
             Wallet = wallet;
             SpaceShipID = spaceShipId;

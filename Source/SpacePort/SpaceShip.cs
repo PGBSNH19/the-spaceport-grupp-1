@@ -47,7 +47,7 @@ namespace SpacePort
             return shipLog.GetLog();
         }
 
-        public bool AddPassenger(Character passenger)
+        public bool AddPassenger(Person passenger)
         {
             bool passengerBoarded = passengerModule.Embark(passenger);
             if (passengerBoarded)
@@ -60,7 +60,7 @@ namespace SpacePort
             return false;            
         }
 
-        public bool RemovePassenger(Character passenger)
+        public bool RemovePassenger(Person passenger)
         {
             bool passengerDisembarked = passengerModule.Disembark(passenger);
             if (passengerDisembarked)
@@ -96,7 +96,7 @@ namespace SpacePort
             return passengerModule.Passengers.Count;
         }
 
-        public List<Character> PassengerList()
+        public List<Person> PassengerList()
         {
             return passengerModule.Passengers;
         }

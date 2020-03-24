@@ -37,7 +37,7 @@ namespace SpacePort
         }
 
 
-        public bool IsAllowedToPark(Character person, SpaceshipInformation spaceship)
+        public bool IsAllowedToPark(Person person, SpaceshipInformation spaceship)
         {
 
             return true;

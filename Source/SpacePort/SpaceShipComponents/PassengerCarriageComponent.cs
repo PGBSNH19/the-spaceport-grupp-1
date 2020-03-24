@@ -6,7 +6,7 @@ namespace SpacePort
 {
     public class PassengerCarriageComponent : HullComponent
     {
-        public List<Character> Passengers { get; private set; } = new List<Character>();
+        public List<Person> Passengers { get; private set; } = new List<Person>();
         public int Capacity { get; private set; }
 
         public PassengerCarriageComponent(double length, int capacity) : base (length)
@@ -14,7 +14,7 @@ namespace SpacePort
             this.Capacity = capacity;
         }
 
-        public bool Embark(Character person)
+        public bool Embark(Person person)
         {
             if (Passengers.Count < Capacity)
             {
@@ -25,7 +25,7 @@ namespace SpacePort
             return false;
         }
 
-        public bool Disembark(Character person)
+        public bool Disembark(Person person)
         {
             int passengerCount = Passengers.Count;
             Passengers.Remove(Passengers.Find(p => p == person));
