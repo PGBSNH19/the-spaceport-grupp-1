@@ -11,6 +11,11 @@ namespace SpacePort
         private readonly IParkingSpaceComponent[] parkingSpaces;
         private readonly APICaller apiCaller;
 
+        public TicketBooth(IParkingSpaceComponent[] parkingSpaces)
+        {
+            this.parkingSpaces = parkingSpaces;
+            apiCaller = new APICaller();
+        }
         public bool IsAllowedToPark(Character person, SpaceshipInformation spaceShip)
         {
 

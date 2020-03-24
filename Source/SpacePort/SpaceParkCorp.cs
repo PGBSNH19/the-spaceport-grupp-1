@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpacePort.API;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,10 +34,19 @@ namespace SpacePort
         public double CheckBalance()
         {
             return CashRegister.CheckBalance();
-        } 
+        }
 
 
+        public bool IsAllowedToPark(Character person, SpaceshipInformation spaceship)
+        {
 
+            return TBooth.IsAllowedToPark(person, spaceship);
+        }
+        public int NumberOfFreeParkingSpaces()
+        {
+            
+            return TBooth.NumberOfFreeParkingSpaces();
+        }
 
 
 

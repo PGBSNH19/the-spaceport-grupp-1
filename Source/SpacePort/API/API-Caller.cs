@@ -11,7 +11,7 @@ namespace SpacePort
 {
     public class APICaller
     {
-        private static RestClient client =  new RestClient("https://swapi.co/api/");
+        private static readonly RestClient client =  new RestClient("https://swapi.co/api/");
         public CharacterInformationRoot GetCharacter(string search = "")
         {
             var request = new RestRequest("people/?search=" + search, DataFormat.Json);
