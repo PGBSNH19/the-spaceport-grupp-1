@@ -8,16 +8,16 @@ namespace SpacePort
     {
         public string Name { get; set; }
 
-        private readonly IEngineComponent engine;
-        private readonly IEventLogComponent shipLog;
+        private readonly EngineComponent engine;
+        private readonly EventLogComponent shipLog;
         private readonly PassengerCarriageComponent passengerModule;
 
-        public SpaceShip(string name, double length, int passengerCapacity)
+        public SpaceShip(string name, EngineComponent engine, EventLogComponent shipLog, PassengerCarriageComponent passengerModule)
         {
             Name = name;
-            engine = new EngineComponent();
-            shipLog = new EventLogComponent();
-            passengerModule = new PassengerCarriageComponent(length, passengerCapacity);
+            this.engine = engine;
+            this.shipLog = shipLog;
+            this.passengerModule = passengerModule;
         }
 
         public void StartEngine()
