@@ -16,6 +16,18 @@ namespace SpacePort
             this.name = name;
         }
 
+        public static SpaceShip BuildFromApi(int id = 1)
+        {
+            ApiFetchData data = new ApiFetchData();
+            var spaceShipData = data.GetSpaceship(1);
+
+            return SpaceShipObjectBuilder
+                .ShipName(spaceShipData.results[0].name)
+                .AddEngine(new EngineComponent())
+                .AddShipLog(new EventLogComponent())
+                .AddPassengerModule(new PassengerCarriageComponent(double.Parse(spaceShipData.results[0].length), int.Parse(spaceShipData.results[0].passengers)))
+                .BuildShip();
+        }
         public static IAddComponents ShipName(string name) => new SpaceShipObjectBuilder(name);
 
         public IAddComponents AddEngine(EngineComponent engine)

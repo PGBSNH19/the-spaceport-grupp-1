@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SpacePort.API
+namespace SpacePort
 {
-    public class CharacterInformation
+    public class PersonData
     {
         public string name { get; set; }
         public string height { get; set; }
@@ -24,11 +24,11 @@ namespace SpacePort.API
         public string url { get; set; }
     }
 
-    public class CharacterInformationRoot
+    public class PersonDataRoot
     {
         public int count { get; set; }
         public string next { get; set; }
         public object previous { get; set; }
-        public List<CharacterInformation> results { get; set; }
+        public List<PersonData> results { get; set; }
     }
 }

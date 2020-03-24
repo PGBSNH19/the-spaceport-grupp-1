@@ -5,40 +5,39 @@ using System.Threading;
 using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
-using SpacePort.API;
 
 namespace SpacePort
 {
-    public class APICaller
+    public class ApiFetchData
     {
         private static readonly RestClient client =  new RestClient("https://swapi.co/api/");
-        public CharacterInformationRoot GetCharacter(string search = "")
+        public PersonDataRoot GetPerson(string search = "")
         {
             var request = new RestRequest("people/?search=" + search, DataFormat.Json);
-            var response = client.Get<CharacterInformationRoot>(request);
+            var response = client.Get<PersonDataRoot>(request);
             
             return response.Data;
         }
 
-        public CharacterInformationRoot GetCharacter(int index = 1)
+        public PersonDataRoot GetPerson(int index = 1)
         {
             var request = new RestRequest("people/" + index, DataFormat.Json);
-            var response = client.Get<CharacterInformationRoot>(request);
+            var response = client.Get<PersonDataRoot>(request);
 
             return response.Data;
         }
-        public SpaceshipInformationRoot GetSpaceship(string search = "")
+        public SpaceshipDataRoot GetSpaceship(string search = "")
         {
             var request = new RestRequest("starships/?search=" + search, DataFormat.Json);
-            var response = client.Get<SpaceshipInformationRoot>(request);
+            var response = client.Get<SpaceshipDataRoot>(request);
 
             return response.Data;
         }
 
-        public SpaceshipInformationRoot GetSpaceship(int index = 1)
+        public SpaceshipDataRoot GetSpaceship(int index = 1)
         {
             var request = new RestRequest("starships/" + index, DataFormat.Json);
-            var response = client.Get<SpaceshipInformationRoot>(request);
+            var response = client.Get<SpaceshipDataRoot>(request);
 
             return response.Data;
         }

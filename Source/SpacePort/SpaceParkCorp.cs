@@ -1,4 +1,4 @@
-﻿using SpacePort.API;
+﻿using SpacePort;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -37,7 +37,7 @@ namespace SpacePort
         }
 
 
-        public bool IsAllowedToPark(Person person, SpaceshipInformation spaceship)
+        public bool IsAllowedToPark(Person person, SpaceshipData spaceship)
         {
 
             return true;
