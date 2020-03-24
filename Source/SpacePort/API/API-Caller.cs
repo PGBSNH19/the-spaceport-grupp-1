@@ -19,9 +19,25 @@ namespace SpacePort
             
             return response.Data;
         }
+
+        public CharacterInformationRoot GetCharacter(int index = 1)
+        {
+            var request = new RestRequest("people/" + index, DataFormat.Json);
+            var response = client.Get<CharacterInformationRoot>(request);
+
+            return response.Data;
+        }
         public SpaceshipInformationRoot GetSpaceship(string search = "")
         {
             var request = new RestRequest("starships/?search=" + search, DataFormat.Json);
+            var response = client.Get<SpaceshipInformationRoot>(request);
+
+            return response.Data;
+        }
+
+        public SpaceshipInformationRoot GetSpaceship(int index = 1)
+        {
+            var request = new RestRequest("starships/" + index, DataFormat.Json);
             var response = client.Get<SpaceshipInformationRoot>(request);
 
             return response.Data;

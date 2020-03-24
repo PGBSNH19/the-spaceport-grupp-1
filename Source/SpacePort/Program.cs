@@ -28,8 +28,11 @@ namespace SpacePort
             characters.Add(new Character(c.results[0].name, (2000.0m), 1));
 
             c = data.GetCharacter("yoda");
-
             characters.Add(new Character(c.results[0].name, (2000.0m), 2));
+
+            characters.Add(new Character("Olle", (2000.0m), 3));
+
+            
 
             Console.ReadKey();
             

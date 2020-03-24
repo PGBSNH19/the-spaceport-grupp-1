@@ -8,7 +8,7 @@ namespace SpacePort
     public class SpaceParkCorp
     {
         private IAccountComponent CashRegister = new CompanyAccount();
-        private TicketBooth TBooth;
+        private TicketBooth ticketBooth;
 
 
         public int Fee()
@@ -40,12 +40,12 @@ namespace SpacePort
         public bool IsAllowedToPark(Character person, SpaceshipInformation spaceship)
         {
 
-            return TBooth.IsAllowedToPark(person, spaceship);
+            return ticketBooth.IsAllowedToPark(person, spaceship);
         }
         public int NumberOfFreeParkingSpaces()
         {
             
-            return TBooth.NumberOfFreeParkingSpaces();
+            return ticketBooth.NumberOfFreeParkingSpaces();
         }
 
 
