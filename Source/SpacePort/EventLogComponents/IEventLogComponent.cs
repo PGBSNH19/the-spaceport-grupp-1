@@ -6,7 +6,7 @@ namespace SpacePort
 {
     public interface IEventLogComponent
     {
-        void WriteToLog(string entry);
-        List<string> GetLog();
+        void WriteToEventLog(string entry);
+        List<string> GetEventLog();
     }
 }

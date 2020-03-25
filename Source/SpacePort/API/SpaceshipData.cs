@@ -26,7 +26,7 @@ namespace SpacePort
         public string url { get; set; }
     }
 
-    public class SpaceshipDataRoot
+    public class SpaceshipDataResults
     {
         public int count { get; set; }
         public string next { get; set; }

@@ -4,12 +4,20 @@ using System.Text;
 
 namespace SpacePort
 {
-    public class SpaceShipObjectBuilder : IAddComponents
+    public interface IAddSpaceShipComponents
+    {
+        IAddSpaceShipComponents AddEngine(EngineComponent engine);
+        IAddSpaceShipComponents AddShipLog(EventLogComponent shipLog);
+        IAddSpaceShipComponents AddPassengerComponent(PassengerHullComponent passengerModule);
+        SpaceShip BuildShip();
+    }
+
+    public class SpaceShipObjectBuilder : IAddSpaceShipComponents
     {
         private string name;
         private EngineComponent engine;
         private EventLogComponent shipLog;
-        private PassengerCarriageComponent passengerModule;
+        private PassengerHullComponent passengerComponent;
 
         public SpaceShipObjectBuilder(string name)
         {
@@ -18,44 +26,44 @@ namespace SpacePort
 
         public static SpaceShip BuildFromApi(int id)
         {
-            ApiFetchData data = new ApiFetchData();
+            ApiDataFetch data = new ApiDataFetch();
             var spaceShipData = data.GetSpaceShip(id);
 
             return SpaceShipObjectBuilder
                 .ShipName(spaceShipData.name)
                 .AddEngine(new EngineComponent())
                 .AddShipLog(new EventLogComponent())
-                .AddPassengerModule(new PassengerCarriageComponent(double.Parse(spaceShipData.length), int.Parse(spaceShipData.passengers)))
+                .AddPassengerComponent(new PassengerHullComponent(double.Parse(spaceShipData.length), int.Parse(spaceShipData.passengers)))
                 .BuildShip();
         }
 
-        public static SpaceShip BuildFromApi(string text)
+        public static SpaceShip BuildFromApi(string name)
         {
-            ApiFetchData data = new ApiFetchData();
-            var spaceShipData = data.GetSpaceShip(text);
+            ApiDataFetch data = new ApiDataFetch();
+            var spaceShipData = data.GetSpaceShip(name);
 
             return SpaceShipObjectBuilder
                 .ShipName(spaceShipData.name)
                 .AddEngine(new EngineComponent())
                 .AddShipLog(new EventLogComponent())
-                .AddPassengerModule(new PassengerCarriageComponent(double.Parse(spaceShipData.length), int.Parse(spaceShipData.passengers)))
+                .AddPassengerComponent(new PassengerHullComponent(double.Parse(spaceShipData.length), int.Parse(spaceShipData.passengers)))
                 .BuildShip();
         }
-        public static IAddComponents ShipName(string name) => new SpaceShipObjectBuilder(name);
+        public static IAddSpaceShipComponents ShipName(string name) => new SpaceShipObjectBuilder(name);
 
-        public IAddComponents AddEngine(EngineComponent engine)
+        public IAddSpaceShipComponents AddEngine(EngineComponent engine)
         {
             this.engine = engine;
             return this;
         }
 
-        public IAddComponents AddPassengerModule(PassengerCarriageComponent passengerModule)
+        public IAddSpaceShipComponents AddPassengerComponent(PassengerHullComponent passengerComponent)
         {
-            this.passengerModule = passengerModule;
+            this.passengerComponent = passengerComponent;
             return this;
         }
 
-        public IAddComponents AddShipLog(EventLogComponent shipLog)
+        public IAddSpaceShipComponents AddShipLog(EventLogComponent shipLog)
         {
             this.shipLog = shipLog;
             return this;
@@ -63,17 +71,7 @@ namespace SpacePort
 
         public SpaceShip BuildShip()
         {
-            return new SpaceShip(this.name, this.engine, this.shipLog, this.passengerModule);
+            return new SpaceShip(this.name, this.engine, this.shipLog, this.passengerComponent);
         }
     }
-
-    public interface IAddComponents
-    {
-        IAddComponents AddEngine(EngineComponent engine);
-        IAddComponents AddShipLog(EventLogComponent shipLog);
-        IAddComponents AddPassengerModule(PassengerCarriageComponent passengerModule);
-        SpaceShip BuildShip();
-    }
-
-
 }

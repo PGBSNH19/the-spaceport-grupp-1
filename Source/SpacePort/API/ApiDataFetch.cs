@@ -9,13 +9,14 @@ using RestSharp.Authenticators;
 
 namespace SpacePort
 {
-    public class ApiFetchData
+    public class ApiDataFetch
     {
         private static readonly RestClient client = new RestClient("https://swapi.co/api/");
-        public async Task<IRestResponse> GetPersonResponse(string search)
+
+        public async Task<IRestResponse> GetPersonResponse(string name)
         {
-            var request = new RestRequest("people/?search=" + search, DataFormat.Json);
-            var response = client.ExecuteAsync<PersonDataRoot>(request);
+            var request = new RestRequest("people/?search=" + name, DataFormat.Json);
+            var response = client.ExecuteAsync<PersonDataResults>(request);
 
             return await response;
         }
@@ -23,14 +24,15 @@ namespace SpacePort
         public async Task<IRestResponse> GetPersonResponse(int index)
         {
             var request = new RestRequest("people/" + index, DataFormat.Json);
-            var response = client.ExecuteAsync<PersonDataRoot>(request);
+            var response = client.ExecuteAsync<PersonDataResults>(request);
 
             return await response;
         }
-        public async Task<IRestResponse> GetSpaceshipResponse(string search)
+
+        public async Task<IRestResponse> GetSpaceshipResponse(string name)
         {
-            var request = new RestRequest("starships/?search=" + search, DataFormat.Json);
-            var response = client.ExecuteAsync<SpaceshipDataRoot>(request);
+            var request = new RestRequest("starships/?search=" + name, DataFormat.Json);
+            var response = client.ExecuteAsync<SpaceshipDataResults>(request);
 
             return await response;
         }
@@ -38,7 +40,7 @@ namespace SpacePort
         public async Task<IRestResponse> GetSpaceshipResponse(int index)
         {
             var request = new RestRequest("starships/" + index, DataFormat.Json);
-            var response = client.ExecuteAsync<SpaceshipDataRoot>(request);
+            var response = client.ExecuteAsync<SpaceshipDataResults>(request);
 
             return await response;
         }
@@ -50,10 +52,13 @@ namespace SpacePort
             return JsonConvert.DeserializeObject<SpaceshipData>(dataResponse.Result.Content);
         }
 
-        public SpaceshipData GetSpaceShip(string search)
+        
+
+        public SpaceshipData GetSpaceShip(string name)
         {
-            var dataResponse = GetSpaceshipResponse(search);
-            var data = JsonConvert.DeserializeObject<SpaceshipDataRoot>(dataResponse.Result.Content);
+            var dataResponse = GetSpaceshipResponse(name);
+            var data = JsonConvert.DeserializeObject<SpaceshipDataResults>(dataResponse.Result.Content);
+
             return data.results[0];
         }
 
@@ -64,14 +69,12 @@ namespace SpacePort
             return JsonConvert.DeserializeObject<PersonData>(dataResponse.Result.Content);
         }
 
-        public PersonData GetPerson(string search)
+        public PersonData GetPerson(string name)
         {
-            var dataResponse = GetPersonResponse(search);
-            var data = JsonConvert.DeserializeObject<PersonDataRoot>(dataResponse.Result.Content);
+            var dataResponse = GetPersonResponse(name);
+            var data = JsonConvert.DeserializeObject<PersonDataResults>(dataResponse.Result.Content);
             return data.results[0];
         }
-
     }
-    
 }
 

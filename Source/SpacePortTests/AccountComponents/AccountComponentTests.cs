@@ -14,7 +14,7 @@ namespace SpacePort.Tests
         public void WithdrawTest_WithdrawNegativeNumber_ReturnZero()
         {
             double amount = 100;
-            AccountComponent account = new AccountComponent(amount);
+            BankAccountComponent account = new BankAccountComponent(amount);
             double result = account.Withdraw(-100);
 
             Assert.AreEqual(0, result);
@@ -24,7 +24,7 @@ namespace SpacePort.Tests
         public void WithdrawTest_WithdrawTooMuch_ReturnZero()
         {
             double amount = 100;
-            AccountComponent account = new AccountComponent(amount);
+            BankAccountComponent account = new BankAccountComponent(amount);
             double result = account.Withdraw(1000);
 
             Assert.AreEqual(0, result);
@@ -34,7 +34,7 @@ namespace SpacePort.Tests
         public void WithdrawTest_WithdrawLessThanBalance_ReturnAmount()
         {
             double amount = 100;
-            AccountComponent account = new AccountComponent(amount);
+            BankAccountComponent account = new BankAccountComponent(amount);
             double result = account.Withdraw(99);
 
             Assert.AreEqual(99, result);
@@ -44,7 +44,7 @@ namespace SpacePort.Tests
         public void WithdrawTest_WithdrawAll_ReturnAll()
         {
             double amount = 100;
-            AccountComponent account = new AccountComponent(amount);
+            BankAccountComponent account = new BankAccountComponent(amount);
             double result = account.Withdraw(100);
 
             Assert.AreEqual(100, result);
@@ -56,7 +56,7 @@ namespace SpacePort.Tests
         {
             double depositAmount = -100;
             double amount = 100;
-            AccountComponent account = new AccountComponent(amount);
+            BankAccountComponent account = new BankAccountComponent(amount);
             account.Deposit(depositAmount);
 
             Assert.AreEqual(amount, account.CheckBalance());
@@ -68,7 +68,7 @@ namespace SpacePort.Tests
         {
             double depositAmount = 100;
             double amount = 100;
-            AccountComponent account = new AccountComponent(amount);
+            BankAccountComponent account = new BankAccountComponent(amount);
             account.Deposit(depositAmount);
 
             Assert.AreEqual(amount + depositAmount, account.CheckBalance());
@@ -79,7 +79,7 @@ namespace SpacePort.Tests
         public void CheckBalanceTest_ReturnBalance()
         {
             double amount = 100;
-            AccountComponent account = new AccountComponent(amount);
+            BankAccountComponent account = new BankAccountComponent(amount);
 
             Assert.AreEqual(amount, account.CheckBalance());
         }

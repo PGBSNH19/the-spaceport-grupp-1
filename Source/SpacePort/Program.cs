@@ -11,8 +11,9 @@ namespace SpacePort
     {
         static void Main(string[] args)
         {
+            //Testing area!
             System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
-            SpaceParkCorp spacePark = new SpaceParkCorp(new AccountComponent(1000), new TicketBooth(30));
+            SpaceParkCorp spacePark = new SpaceParkCorp(new BankAccountComponent(1000), new ParkingService(30));
             SpaceShip falcon = SpaceShipObjectBuilder.BuildFromApi("destroyer");
             falcon.AddPassenger(PersonObjectBuilder.BuildFromApi(1));
             Console.WriteLine(falcon.PassengerList()[0].Name);

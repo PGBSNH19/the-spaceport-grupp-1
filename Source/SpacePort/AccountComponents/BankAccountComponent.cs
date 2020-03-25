@@ -4,16 +4,15 @@ using System.Text;
 
 namespace SpacePort
 {
-    public class AccountComponent : IAccountComponent
+    public class BankAccountComponent : IBankAccountComponent
     {
         private double balance;
 
-        public AccountComponent (double balance = 0)
+        public BankAccountComponent (double balance = 0)
         {
             if(balance > 0)
             {
-            this.balance = balance;
-
+                this.balance = balance;
             }
             else
             {

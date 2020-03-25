@@ -4,22 +4,22 @@ using System.Text;
 
 namespace SpacePort 
 {
-    public class CompanyAccount : AccountComponent
+    public class CompanyBankAccount : BankAccountComponent
     {
-        private IEventLogComponent accountLog = new EventLogComponent();
+        private IEventLogComponent bankAccountLog = new EventLogComponent();
         
-        public CompanyAccount(double amount = 0) : base(amount) { }
+        public CompanyBankAccount(double amount = 0) : base(amount) { }
 
         public override void Deposit(double amount)
         {
             if (amount > 0)
             {
                 base.Deposit(amount);
-                accountLog.WriteToLog($"Deposit: {amount}.");
+                bankAccountLog.WriteToEventLog($"Deposit: {amount}.");
             }
             else
             {
-                accountLog.WriteToLog($"Deposit: Invalid amount ({amount}). No deposit.");
+                bankAccountLog.WriteToEventLog($"Deposit: Invalid amount ({amount}). No deposit.");
             }
         }
 

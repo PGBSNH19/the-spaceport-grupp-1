@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace SpacePort
-{
+{    public interface IAddFeatures
+    {
+        IAddFeatures AddWallet(double wallet);
+        IAddFeatures AddSpaceShipID(int spaceShipID);
+        Person BuildPerson();
+    }
+
     public class PersonObjectBuilder : IAddFeatures
     {
         private string name;
@@ -17,7 +23,7 @@ namespace SpacePort
 
         public static Person BuildFromApi(int id)
         {
-            ApiFetchData data = new ApiFetchData();
+            ApiDataFetch data = new ApiDataFetch();
             var PersonData = data.GetPerson(id);
 
             return PersonObjectBuilder
@@ -43,14 +49,6 @@ namespace SpacePort
         public Person BuildPerson()
         {
             return new Person(this.name, this.wallet, this.spaceShipID);
-        }
-        
-    }
-
-    public interface IAddFeatures
-    {
-        IAddFeatures AddWallet(double wallet);
-        IAddFeatures AddSpaceShipID(int spaceShipID);
-        Person BuildPerson();
+        }        
     }
 }

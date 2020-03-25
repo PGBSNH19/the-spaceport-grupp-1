@@ -15,7 +15,7 @@ namespace SpacePort.Tests
             EventLogComponent eLog = new EventLogComponent();
             List<string> logCopy;
 
-            logCopy = eLog.GetLog();
+            logCopy = eLog.GetEventLog();
 
             Assert.IsNotNull(logCopy);
         }
@@ -25,9 +25,9 @@ namespace SpacePort.Tests
         {
             string entry = "testdata";
             EventLogComponent eventLog = new EventLogComponent();
-            eventLog.WriteToLog(entry);
+            eventLog.WriteToEventLog(entry);
 
-            Assert.AreEqual(entry, eventLog.GetLog()[0]);
+            Assert.AreEqual(entry, eventLog.GetEventLog()[0]);
         }
     }
 }

@@ -10,26 +10,26 @@ namespace SpacePort
 
         private readonly EngineComponent engine;
         private readonly EventLogComponent shipLog;
-        private readonly PassengerCarriageComponent passengerModule;
+        private readonly PassengerHullComponent passengerComponent;
 
-        public SpaceShip(string name, EngineComponent engine, EventLogComponent shipLog, PassengerCarriageComponent passengerModule)
+        public SpaceShip(string name, EngineComponent engine, EventLogComponent shipLog, PassengerHullComponent passengerComponent)
         {
-            Name = name;
+            this.Name = name;
             this.engine = engine;
             this.shipLog = shipLog;
-            this.passengerModule = passengerModule;
+            this.passengerComponent = passengerComponent;
         }
 
         public void StartEngine()
         {
             engine.Start();
-            shipLog.WriteToLog("Engine fired up!");
+            shipLog.WriteToEventLog("Engine fired up!");
         }
 
         public void StopEngine()
         {
             engine.Stop();
-            shipLog.WriteToLog("Engine powered down.");
+            shipLog.WriteToEventLog("Engine powered down.");
         }
 
         public bool IsEngineOn()
@@ -37,73 +37,76 @@ namespace SpacePort
             return engine.IsRunning();
         }
 
-        public void AddLogEntry(string message)
+        public void AddShipLogEntry(string message)
         {
-            shipLog.WriteToLog(message);
+            shipLog.WriteToEventLog(message);
         }
 
         public List<string> GetShipLog()
         {
-            return shipLog.GetLog();
+            return shipLog.GetEventLog();
         }
 
         public bool AddPassenger(Person passenger)
         {
-            bool passengerBoarded = passengerModule.Embark(passenger);
+            bool passengerBoarded = passengerComponent.Embark(passenger);
             if (passengerBoarded)
             {
-                shipLog.WriteToLog($"{passenger.Name} boarded ship.");
+                shipLog.WriteToEventLog($"{passenger.Name} boarded ship.");
                 return true;
             }
 
-            shipLog.WriteToLog($"{passenger.Name} cannot board because ship is at full capacity.");
+            shipLog.WriteToEventLog($"{passenger.Name} cannot board because ship is at full capacity.");
+
             return false;            
         }
 
         public bool RemovePassenger(Person passenger)
         {
-            bool passengerDisembarked = passengerModule.Disembark(passenger);
+            bool passengerDisembarked = passengerComponent.Disembark(passenger);
             if (passengerDisembarked)
             {
-                shipLog.WriteToLog($"{passenger.Name} disembarked ship.");
+                shipLog.WriteToEventLog($"{passenger.Name} disembarked ship.");
                 return true;
             }
 
-            shipLog.WriteToLog($"There's noone named {passenger.Name} onboard.");
+            shipLog.WriteToEventLog($"There's noone named {passenger.Name} onboard.");
+
             return false;
         }
 
-        public bool RemovePassenger(string passengerName)
+        public bool RemovePassenger(string name)
         {
-            bool passengerDisembarked = passengerModule.Disembark(passengerName);
+            bool passengerDisembarked = passengerComponent.Disembark(name);
             if (passengerDisembarked)
             {
-                shipLog.WriteToLog($"{passengerName} disembarked ship.");
+                shipLog.WriteToEventLog($"{name} disembarked ship.");
                 return true;
             }
 
-            shipLog.WriteToLog($"There's no-one named {passengerName} on-board.");
+            shipLog.WriteToEventLog($"There's no-one named {name} on-board.");
+
             return false;
         }
 
         public int PassengerCapacity()
         {
-            return passengerModule.Capacity;
+            return passengerComponent.Capacity;
         }
 
         public int PassengerCount()
         {
-            return passengerModule.Passengers.Count;
+            return passengerComponent.Passengers.Count;
         }
 
         public List<Person> PassengerList()
         {
-            return passengerModule.Passengers;
+            return passengerComponent.Passengers;
         }
 
         public double GetShipLength()
         {
-            return passengerModule.GetLength();
+            return passengerComponent.GetLength();
         }
     }
 }

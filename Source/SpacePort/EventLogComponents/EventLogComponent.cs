@@ -6,18 +6,16 @@ namespace SpacePort
 {
     public class EventLogComponent : IEventLogComponent
     {
-        private List<string> log = new List<string>();
+        private List<string> eventLog = new List<string>();
 
-        public List<string> GetLog()
+        public List<string> GetEventLog()
         {
-            return log;
+            return eventLog;
         }
 
-        public void WriteToLog(string entry)
+        public void WriteToEventLog(string entry)
         {
-            log.Add(entry);
+            eventLog.Add(entry);
         }
-
-        
     }
 }

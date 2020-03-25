@@ -4,12 +4,12 @@ using System.Text;
 
 namespace SpacePort
 {
-    public class PassengerCarriageComponent : HullComponent
+    public class PassengerHullComponent : HullComponent
     {
         public List<Person> Passengers { get; private set; } = new List<Person>();
         public int Capacity { get; private set; }
 
-        public PassengerCarriageComponent(double length, int capacity) : base (length)
+        public PassengerHullComponent(double length, int capacity) : base (length)
         {
             this.Capacity = capacity;
         }

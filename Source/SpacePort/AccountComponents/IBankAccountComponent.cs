@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SpacePort
 {
-    public interface IAccountComponent
+    public interface IBankAccountComponent
     {
         double Withdraw(double amount);
         void Deposit(double amount);

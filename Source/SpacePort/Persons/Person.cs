@@ -17,7 +17,8 @@ namespace SpacePort
 
         public int Pay()
         {
-            return 1;
+            throw new NotImplementedException();
+            //return 1;
         }
     }
 }

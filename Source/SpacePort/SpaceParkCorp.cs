@@ -7,54 +7,47 @@ namespace SpacePort
 {
     public class SpaceParkCorp
     {
-        private IAccountComponent cashRegister;
-        private TicketBooth ticketBooth;
+        private IBankAccountComponent bankAccount;
+        private ParkingService parkingService;
 
-        public SpaceParkCorp(IAccountComponent cashRegister, TicketBooth ticketBooth)
+        public SpaceParkCorp(IBankAccountComponent bankAccount, ParkingService parkingService)
         {
-            this.cashRegister = cashRegister;
-            this.ticketBooth = new TicketBooth(19);
-        }
-
-        public int Fee()
-        {
-            return 0;
+            this.bankAccount = bankAccount;
+            this.parkingService = new ParkingService(19);
         }
 
         public void CheckOut()
         {
-
+            throw new NotImplementedException();
         }
 
+        //Bank account methods
         public void Deposit(double amount) 
         {
-            cashRegister.Deposit(amount);
+            bankAccount.Deposit(amount);
         }
 
         public void Withdraw(double amount)
         {
-            cashRegister.Withdraw(amount);
+            bankAccount.Withdraw(amount);
         }
 
         public double CheckBalance()
         {
-            return cashRegister.CheckBalance();
+            return bankAccount.CheckBalance();
         }
 
-
+        //Parking control methods
         public bool IsAllowedToPark(Person person, SpaceShip spaceship)
         {
 
-            return ticketBooth.IsAllowedToPark(person, spaceship);
+            return parkingService.IsAllowedToPark(person, spaceship);
         }
+
         public int NumberOfFreeParkingSpaces()
         {
             
-            return ticketBooth.NumberOfFreeParkingSpaces();
+            return parkingService.NumberOfFreeParkingSpaces();
         }
-
-
-
-
     }
 }
