@@ -14,8 +14,5 @@ namespace SpacePort
         public string Name { get; set; }
         public double Length { get; set; }
         public PersonModel Owner { get; set; }
-
-
-
     }
 }
