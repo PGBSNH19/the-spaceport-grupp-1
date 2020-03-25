@@ -8,8 +8,6 @@ namespace SpacePort
 {
     public class SpaceShip
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SpaceShipID { get; set; }
         public string Name { get; set; }
         public Person Owner { get; set; }

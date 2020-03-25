@@ -8,8 +8,6 @@ namespace SpacePort
 {
     public class PassengerHullComponent : HullComponent
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PassengerComponentID { get; set; }
         public List<Person> Passengers { get; private set; } = new List<Person>();
         public int Capacity { get; private set; }

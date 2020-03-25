@@ -6,21 +6,18 @@ using System.Text;
 
 namespace SpacePort
 {
-    public class Person
+    public class PersonModel
     {
-       
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PersonID { get; set; }
-        public string Name { get; set; }
-        public double Wallet { get; set; }
-        public Person(string name, double wallet) {
-            Name = name;
-            Wallet = wallet;
-        }
 
-        public int Pay()
-        {
-            throw new NotImplementedException();
-            //return 1;
-        }
+        public string Name { get; set; }
+
+        public double Wallet { get; set; }
+
+       
+
+
     }
 }

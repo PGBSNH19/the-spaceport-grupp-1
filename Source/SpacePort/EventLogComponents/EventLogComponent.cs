@@ -8,8 +8,7 @@ namespace SpacePort
 {
     public class EventLogComponent : IEventLogComponent
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       
         public int EventLogID { get; set; }
         private List<string> eventLog = new List<string>();
 
