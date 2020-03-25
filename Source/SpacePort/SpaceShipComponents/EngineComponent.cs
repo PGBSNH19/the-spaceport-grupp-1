@@ -8,8 +8,7 @@ namespace SpacePort
 {
     public class EngineComponent : IEngineComponent
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       
         public int EngineID { get; set; }
         private bool isRunning;
 
