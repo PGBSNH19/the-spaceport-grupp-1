@@ -40,7 +40,7 @@ namespace SpacePort
 
         public bool IsEngineOn()
         {
-            return engine.IsRunning();
+            return engine.GetIsRunning();
         }
 
         public void AddShipLogEntry(string message)

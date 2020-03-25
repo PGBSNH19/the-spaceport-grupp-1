@@ -12,24 +12,24 @@ namespace SpacePort.Tests
         [TestMethod()]
         public void IsRunningTest_()
         {
-            EngineComponent engine = new EngineComponent();
-            Assert.IsNotNull(engine.IsRunning());
+            EngineComponent engine = new EngineComponent(false);
+            Assert.IsNotNull(engine.GetIsRunning());
         }
 
         [TestMethod()]
         public void StartTest_StartEngine_IsRunningTrue()
         {
-            EngineComponent engine = new EngineComponent();
+            EngineComponent engine = new EngineComponent(false);
             engine.Start();
-            Assert.IsTrue(engine.IsRunning());
+            Assert.IsTrue(engine.GetIsRunning());
         }
 
         [TestMethod()]
         public void StopTest_StopEngine_IsRunningFalse()
         {
-            EngineComponent engine = new EngineComponent();
+            EngineComponent engine = new EngineComponent(false);
             engine.Stop();
-            Assert.IsFalse(engine.IsRunning());
+            Assert.IsFalse(engine.GetIsRunning());
         }
     }
 

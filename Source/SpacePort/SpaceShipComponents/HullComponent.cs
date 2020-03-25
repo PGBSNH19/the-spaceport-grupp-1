@@ -6,16 +6,16 @@ namespace SpacePort
 {
     public abstract class HullComponent : IHullComponent
     {
-        private readonly double length;
+       public double Length { get; set; }
 
         public HullComponent(double length)
         {
-            this.length = length;
+            this.Length = length;
         }
 
         public double GetLength()
         {
-            return length;
+            return Length;
         }
     }
 }

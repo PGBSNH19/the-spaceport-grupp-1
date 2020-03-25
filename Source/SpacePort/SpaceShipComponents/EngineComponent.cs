@@ -11,26 +11,26 @@ namespace SpacePort
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EngineID { get; set; }
-        private bool isRunning;
+        public bool IsRunning { get; set; }
 
         public EngineComponent(bool isRunning)
         {
-            this.isRunning = isRunning;
+            this.IsRunning = isRunning;
         }
 
-        public bool IsRunning()
+        public bool GetIsRunning()
         {
-            return isRunning;
+            return IsRunning;
         }
 
         public void Start()
         {
-            isRunning = true;
+            IsRunning = true;
         }
 
         public void Stop()
         {
-            isRunning = false;
+            IsRunning = false;
         }
     }
 }
