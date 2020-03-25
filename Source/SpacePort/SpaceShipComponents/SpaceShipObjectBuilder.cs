@@ -31,7 +31,7 @@ namespace SpacePort
 
             return SpaceShipObjectBuilder
                 .ShipName(spaceShipData.name)
-                .AddEngine(new EngineComponent())
+                .AddEngine(new EngineComponent(false))
                 .AddShipLog(new EventLogComponent())
                 .AddPassengerComponent(new PassengerHullComponent(double.Parse(spaceShipData.length), int.Parse(spaceShipData.passengers)))
                 .BuildShip();
@@ -44,7 +44,7 @@ namespace SpacePort
 
             return SpaceShipObjectBuilder
                 .ShipName(spaceShipData.name)
-                .AddEngine(new EngineComponent())
+                .AddEngine(new EngineComponent(false))
                 .AddShipLog(new EventLogComponent())
                 .AddPassengerComponent(new PassengerHullComponent(double.Parse(spaceShipData.length), int.Parse(spaceShipData.passengers)))
                 .BuildShip();

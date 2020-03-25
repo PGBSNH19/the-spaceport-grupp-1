@@ -6,7 +6,6 @@ namespace SpacePort
 {    public interface IAddFeatures
     {
         IAddFeatures AddWallet(double wallet);
-        IAddFeatures AddSpaceShipID(int spaceShipID);
         Person BuildPerson();
     }
 
@@ -14,7 +13,6 @@ namespace SpacePort
     {
         private string name;
         private double wallet;
-        private int spaceShipID;
 
         public PersonObjectBuilder(string name)
         {
@@ -29,7 +27,6 @@ namespace SpacePort
             return PersonObjectBuilder
                 .AddName(PersonData.name)
                 .AddWallet(200.5)
-                .AddSpaceShipID(1)
                 .BuildPerson();
         }
 
@@ -40,15 +37,10 @@ namespace SpacePort
             this.wallet = wallet;
             return this;
         }
-        public IAddFeatures AddSpaceShipID(int spaceShipID)
-        {
-            this.spaceShipID = spaceShipID;
-            return this;
-        }
         
         public Person BuildPerson()
         {
-            return new Person(this.name, this.wallet, this.spaceShipID);
+            return new Person(this.name, this.wallet);
         }        
     }
 }

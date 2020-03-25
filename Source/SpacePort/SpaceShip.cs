@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SpacePort
 {
     public class SpaceShip
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int SpaceShipID { get; set; }
         public string Name { get; set; }
+        public Person Owner { get; set; }
 
         private readonly EngineComponent engine;
         private readonly EventLogComponent shipLog;
