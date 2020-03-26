@@ -11,11 +11,15 @@ namespace SpacePort
         public bool Occupied { get; set; }
 
 
-        public ParkingSpace(int parkingSpaceID, SpaceShip spaceShip, bool occupied = false)
+        public ParkingSpace(int parkingSpaceID, SpaceShip spaceShip, bool occupied)
         {
             this.ParkingSpaceID = parkingSpaceID;
             this.SpaceShip = spaceShip;
             this.Occupied = Occupied;
+        }
+        public ParkingSpace(bool occupied = false)
+        {
+            
         }
     }
 }

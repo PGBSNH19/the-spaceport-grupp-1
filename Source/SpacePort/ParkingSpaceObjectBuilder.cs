@@ -10,7 +10,7 @@ namespace SpacePort
         IAddParkingSpaceComponents AddSpaceShip(SpaceShip spaceShip);
         IAddParkingSpaceComponents AddOccupied(bool occupied);
 
-        ParkingSpaceModel BuildParkingSpace();
+        ParkingSpace BuildParkingSpace();
     }
 
     public class ParkingSpaceObjectBuilder : IAddParkingSpaceComponents
@@ -38,12 +38,12 @@ namespace SpacePort
             return this;
         }
 
-        public ParkingSpaceModel BuildParkingSpace()
+        public ParkingSpace BuildParkingSpace()
         {
-            return new ParkingSpaceModel(this.id, this.spaceShip, this.occupied);
+            return new ParkingSpace(this.id, this.spaceShip, this.occupied);
         }
 
-        public static ParkingSpaceModel BuildFromDb(int id)
+        public static ParkingSpace BuildFromDb(int id)
         {
             SpaceParkContext context = new SpaceParkContext();
             ParkingSpaceModel model = ParkingSpaceModel.CreateModelFromDb(id).Result;
