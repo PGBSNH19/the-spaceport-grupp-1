@@ -34,11 +34,11 @@ namespace SpacePort
 
             using (var context = new SpaceParkContext())
             {
-                Console.WriteLine("Start GetSpaceship...");
+                Console.WriteLine("Start GetPerson...");
 
                 person = await context.Person.Where(s => s.PersonID == id).FirstOrDefaultAsync<PersonModel>();
 
-                Console.WriteLine("Finished GetSpaceship...");
+                Console.WriteLine("Finished GetPerson...");
             }
 
             return person;

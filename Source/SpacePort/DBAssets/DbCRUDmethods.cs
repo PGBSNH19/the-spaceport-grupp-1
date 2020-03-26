@@ -28,7 +28,7 @@ namespace SpacePort
             {
                 if (!context.SpaceShip.Any(p => p.Name == spaceShip.Name))
                 {
-                    context.SpaceShip.Add(new SpaceShipModel { Name = spaceShip.Name, Length = spaceShip.GetShipLength(), Owner = new PersonModel { Name = spaceShip.Owner.Name, Wallet = spaceShip.Owner.Wallet } });
+                    context.SpaceShip.Add(new SpaceShipModel { Name = spaceShip.Name, Length = spaceShip.Length, Owner = new PersonModel { Name = spaceShip.Owner.Name, Wallet = spaceShip.Owner.Wallet } });
                 }
             }
         }

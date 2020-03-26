@@ -30,7 +30,7 @@ namespace SpacePort
             }
 
             return apiDataFetch.GetPerson(person.Name).name != null && 
-                        spaceShip.GetShipLength() <= 120000;
+                        spaceShip.Length <= 120000;
         }
 
         public int NumberOfFreeParkingSpaces()

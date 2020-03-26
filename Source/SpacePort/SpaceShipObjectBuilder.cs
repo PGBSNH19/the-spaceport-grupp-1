@@ -61,12 +61,13 @@ namespace SpacePort
 
         public static SpaceShip BuildFromDb(int id)
         {
+            SpaceParkContext context = new SpaceParkContext();
             SpaceShipModel model = SpaceShipModel.CreateModelFromDb(id).Result;
-
+            Person person = PersonObjectBuilder.BuildFromDataBase(context.SpaceShip.Where(o => o.SpaceShipID == id).Select(p => p.Owner.PersonID).First());
             return SpaceShipObjectBuilder
                 .ShipName(model.Name)
                 .AddLength(model.Length)
-                .AddOwner(PersonObjectBuilder.BuildFromDataBase(model.Owner.PersonID))
+                .AddOwner(person)
                 .AddShipID(model.SpaceShipID)
                 .BuildShip();
         }
