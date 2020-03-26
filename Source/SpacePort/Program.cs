@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SpacePort
 {
@@ -68,6 +70,38 @@ namespace SpacePort
                 }
                 
             }
+        }
+
+        public static async Task<PersonModel> GetPersonDataById(int id)
+        {
+            PersonModel person = null;
+
+            using (var context = new SpaceParkContext())
+            {
+                Console.WriteLine("Start GetSpaceship...");
+
+                person = await context.Person.Where(s => s.PersonID == id).FirstOrDefaultAsync<PersonModel>();
+
+                Console.WriteLine("Finished GetSpaceship...");
+            }
+
+            return person;
+        }
+
+        public static async Task<SpaceShipModel> GetSpaceShipDataById(int id)
+        {
+            SpaceShipModel spaceShip = null;
+
+            using (var context = new SpaceParkContext())
+            {
+                Console.WriteLine("Start GetPerson...");
+
+                spaceShip = await context.SpaceShip.Where(s => s.SpaceShipID == id).FirstOrDefaultAsync<SpaceShipModel>();
+
+                Console.WriteLine("Finished GetPerson...");
+            }
+
+            return spaceShip;
         }
     }
 }
