@@ -45,7 +45,7 @@ namespace SpacePort
 
         public static Person BuildFromDataBase(int primaryKey)
         {
-            PersonModel dbModel = GetPersonDataById(primaryKey).Result;
+            PersonModel dbModel = PersonModel.GetPersonDataById(primaryKey).Result;
 
             return PersonObjectBuilder
                 .AddName(dbModel.Name)
@@ -63,22 +63,6 @@ namespace SpacePort
                 .AddName(PersonData.name)
                 .AddWallet(200.5)
                 .BuildPerson();
-        }
-
-        public static async Task<PersonModel> GetPersonDataById(int id)
-        {
-            PersonModel person = null;
-
-            using (var context = new SpaceParkContext())
-            {
-                Console.WriteLine("Start GetSpaceship...");
-
-                person = await context.Person.Where(s => s.PersonID == id).FirstOrDefaultAsync<PersonModel>();
-
-                Console.WriteLine("Finished GetSpaceship...");
-            }
-
-            return person;
         }
     }
 }

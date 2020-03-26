@@ -8,20 +8,15 @@ namespace SpacePort
 {
     public class Person
     {
-       
         public int PersonID { get; private set; }
         public string Name { get; set; }
         public double Wallet { get; set; }
-        public Person(int personID, string name, double wallet) {
+        
+        public Person(int personID, string name, double wallet) 
+        {
             this.PersonID = personID;
             Name = name;
             Wallet = wallet;
-        }
-
-        public int Pay()
-        {
-            throw new NotImplementedException();
-            //return 1;
         }
     }
 }

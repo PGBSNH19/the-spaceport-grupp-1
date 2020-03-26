@@ -16,12 +16,12 @@ namespace SpacePort
             //Testing area!
             System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
 
+            Person person = PersonObjectBuilder.BuildFromDataBase(1);
+
+            Console.WriteLine(person.Name);
+            Console.ReadKey();
+
         }
-
-
-
-
-
 
         public static async Task<SpaceShipModel> GetSpaceShipDataById(int id)
         {

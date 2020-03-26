@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SpacePort
 {
@@ -24,6 +27,21 @@ namespace SpacePort
                 Name = personData.name,
                 Wallet = 300
             };
+        }
+        public static async Task<PersonModel> GetPersonDataById(int id)
+        {
+            PersonModel person = null;
+
+            using (var context = new SpaceParkContext())
+            {
+                Console.WriteLine("Start GetSpaceship...");
+
+                person = await context.Person.Where(s => s.PersonID == id).FirstOrDefaultAsync<PersonModel>();
+
+                Console.WriteLine("Finished GetSpaceship...");
+            }
+
+            return person;
         }
     }
 }

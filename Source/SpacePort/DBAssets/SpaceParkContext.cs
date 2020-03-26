@@ -13,7 +13,7 @@ namespace SpacePort
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"server=LAPTOP-MGQ777UR\SQLEXPRESS;Database=SpacePortDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"server=MIRKIC-1\SQLEXPRESS;Database=SpacePortDb;Trusted_Connection=True;");
         }
     }
 }
