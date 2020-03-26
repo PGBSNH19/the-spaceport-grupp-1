@@ -28,7 +28,7 @@ namespace SpacePort
                 Wallet = 300
             };
         }
-        public static async Task<PersonModel> GetPersonDataById(int id)
+        public static async Task<PersonModel> CreateModelFromDb(int id)
         {
             PersonModel person = null;
 

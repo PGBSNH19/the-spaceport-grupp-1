@@ -18,7 +18,7 @@ namespace SpacePort
 
             for (int i = 0; i < this.parkingSpaces.Length; i++)
             {
-                this.parkingSpaces[i] = new ParkingSpaceComponent();
+                this.parkingSpaces[i] = new ParkingSpaceModel();
             }
         }
 
