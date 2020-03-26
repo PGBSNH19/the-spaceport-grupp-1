@@ -9,7 +9,7 @@ namespace SpacePort
     {
         public DbSet<SpaceShipModel> SpaceShip { get; set; }
         public DbSet<PersonModel> Person { get; set; }
-        public DbSet<ParkingSpace> ParkingSpace { get; set; }
+        public DbSet<ParkingSpaceModel> ParkingSpace { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

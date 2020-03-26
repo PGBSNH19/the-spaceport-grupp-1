@@ -12,7 +12,7 @@ namespace SpacePort.Tests
         [TestMethod()]
         public void ParkTest_IsOccupiedSetsToTrue_True()
         {
-            ParkingSpace parking = new ParkingSpace();
+            ParkingSpaceModel parking = new ParkingSpaceModel();
 
             parking.Park();
 
@@ -22,7 +22,7 @@ namespace SpacePort.Tests
         [TestMethod()]
         public void ParkTest_IsOccupiedSetsToFalse_False()
         {
-            ParkingSpace parking = new ParkingSpace();
+            ParkingSpaceModel parking = new ParkingSpaceModel();
 
             parking.Depart();
 
@@ -33,7 +33,7 @@ namespace SpacePort.Tests
         [TestMethod()]
         public void ParkTest_IsOccupiedStatus_()
         {
-            ParkingSpace parking = new ParkingSpace();
+            ParkingSpaceModel parking = new ParkingSpaceModel();
 
            
 
