@@ -16,8 +16,14 @@ namespace SpacePort
 
         public double Wallet { get; set; }
 
-       
-
-
+        public PersonModel CreateModelFromAPI(ApiDataFetch dataFetch, int searchIndex)
+        {
+            PersonData personData = dataFetch.GetPerson(searchIndex);
+            return new PersonModel
+            {
+                Name = personData.name,
+                Wallet = 300
+            };
+        }
     }
 }

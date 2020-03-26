@@ -24,32 +24,27 @@ namespace SpacePort
             //Console.ReadKey();
 
             if (true)
-            {              
-                SpaceShipModel spaceShipModel = new SpaceShipModel();
-                SpaceshipData spaceshipData = apiDFetch.GetSpaceShip("falcon");
-                spaceShipModel.Name = spaceshipData.name;
-                spaceShipModel.Length = double.Parse(spaceshipData.length);
-                spaceShipModel.Owner = new PersonModel
-                {
-                    Name = "Harry Dirt",
-                    Wallet = 100
-                };
-
-                SpaceShipModel spaceShipModel2 = new SpaceShipModel();
-                spaceShipModel2.Name = spaceshipData.name;
-                spaceShipModel2.Length = double.Parse(spaceshipData.length);
-                spaceShipModel2.Owner = new PersonModel
-                {
-                    Name = "Dirty Hair",
-                    Wallet = 500
-                };
-
+            {
                 //Test creation and db entry
                 using (var context = new SpaceParkContext())
                 {
-                    context.SpaceShip.Add(spaceShipModel);
-                    context.SpaceShip.Add(spaceShipModel2);
+                    for (int i = 1; i < 11; i++)
+                    {
+                        if (apiDFetch.GetSpaceShip(i).name != null)
+                        {
+                            SpaceShipModel spaceShip = SpaceShipModel.
+                                CreateModelFromAPI(new ApiDataFetch(), 
+                                                    i, 
+                                                    new PersonModel
+                                                    {
+                                                        Name = "test",
+                                                        Wallet = 100
+                                                    });
 
+                            context.SpaceShip.Add(spaceShip);
+                        }                        
+                    }
+                    
                     context.SaveChanges();
                 }
 
@@ -73,9 +68,6 @@ namespace SpacePort
                 }
                 
             }
-
-
-
         }
     }
 }

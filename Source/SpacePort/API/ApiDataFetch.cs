@@ -52,8 +52,6 @@ namespace SpacePort
             return JsonConvert.DeserializeObject<SpaceshipData>(dataResponse.Result.Content);
         }
 
-        
-
         public SpaceshipData GetSpaceShip(string name)
         {
             var dataResponse = GetSpaceshipResponse(name);

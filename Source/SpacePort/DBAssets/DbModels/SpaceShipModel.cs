@@ -14,5 +14,16 @@ namespace SpacePort
         public string Name { get; set; }
         public double Length { get; set; }
         public PersonModel Owner { get; set; }
+
+        public static SpaceShipModel CreateModelFromAPI(ApiDataFetch dataFetch, int searchIndex, PersonModel owner)
+        {
+            SpaceshipData spaceshipData = dataFetch.GetSpaceShip(searchIndex);
+            return new SpaceShipModel
+            {
+                Name = spaceshipData.name,
+                Length = double.Parse(spaceshipData.length),
+                Owner = owner
+            };
+        }
     }
 }
