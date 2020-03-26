@@ -10,7 +10,7 @@ namespace SpacePort
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int SpaceShipID { get; set; }
+        public int SpaceShipID { get; private set; }
         public string Name { get; set; }
         public double Length { get; set; }
         public PersonModel Owner { get; set; }
