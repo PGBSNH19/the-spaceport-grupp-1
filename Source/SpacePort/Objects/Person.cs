@@ -23,7 +23,9 @@ namespace SpacePort
             this.ID = id;
             this.Name = name;
             this.Wallet = wallet;
-        }/// <summary>
+        }
+
+        /// <summary>
          /// Converts this type to a type that represents it's database model structure.
          /// </summary>
          /// <returns></returns>
@@ -36,6 +38,7 @@ namespace SpacePort
             };
         }
 
+<<<<<<< HEAD
         public static async Task<List<Person>> GetSpaceShipsAsync()
         {
             SpaceParkContext context = new SpaceParkContext();
@@ -49,6 +52,12 @@ namespace SpacePort
             }
             return persons;
 
+=======
+        public static Person CreateObjectFromAPI(ApiDataFetch dataFetch, int searchIndex)
+        {
+            PersonData personData = dataFetch.GetPerson(searchIndex);
+            return new Person(personData.name, 200);
+>>>>>>> origin
         }
     }
 }
