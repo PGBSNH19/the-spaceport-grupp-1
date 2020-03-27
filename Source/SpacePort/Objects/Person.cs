@@ -10,6 +10,12 @@ namespace SpacePort
         public string Name { get; set; }
         public double Wallet { get; set; }
 
+        public Person(string name, double wallet)
+        {
+            this.Name = name;
+            this.Wallet = wallet;
+        }
+
         public Person(int id, string name, double wallet)
         {
             this.ID = id;
