@@ -10,8 +10,8 @@ using SpacePort;
 namespace SpacePort.Migrations
 {
     [DbContext(typeof(SpaceParkContext))]
-    [Migration("20200327104512_Initial")]
-    partial class Initial
+    [Migration("20200327123809_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

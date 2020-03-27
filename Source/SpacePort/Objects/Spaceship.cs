@@ -8,8 +8,17 @@ namespace SpacePort
     {
         public int ID { get; private set; }
         public string Name { get; set; }
-        public int Length { get; set; }
+        public double Length { get; set; }
         public Person Owner { get; set; }
+
+        /// <summary>
+        /// Warning: Use only when constructing object from database!
+        /// </summary>
+        /// <param name="id"></param>
+        public void SetID(int id)
+        {
+            this.ID = id;
+        }
 
         /// <summary>
         /// Converts this type to a type that represents it's database model structure.

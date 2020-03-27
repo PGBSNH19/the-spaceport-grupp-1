@@ -26,15 +26,17 @@ namespace SpacePort
             ParkingSpaces.Add(new ParkingSpace { OccupyingSpaceship = falcon });
             ParkingSpaces.Add(new ParkingSpace());
 
-            using (var context = new SpaceParkContext())
-            {
-                context.Add<ParkingSpaceDbModel>(ParkingSpaces[0].ToDbModel());
-                context.Add<ParkingSpaceDbModel>(ParkingSpaces[1].ToDbModel());
+            //using (var context = new SpaceParkContext())
+            //{
+            //    context.Add<ParkingSpaceDbModel>(ParkingSpaces[0].ToDbModel());
+            //    context.Add<ParkingSpaceDbModel>(ParkingSpaces[1].ToDbModel());
 
-                context.Add<SpaceshipDbModel>(cruiser.ToDbModel());
+            //    context.Add<SpaceshipDbModel>(cruiser.ToDbModel());
 
-                context.SaveChanges();
-            }
+            //    context.SaveChanges();
+            //}
+
+            ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
         }
     }
 }
