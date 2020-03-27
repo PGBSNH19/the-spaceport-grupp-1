@@ -10,10 +10,15 @@ namespace SpacePort
         public string Name { get; set; }
         public double Wallet { get; set; }
 
-        /// <summary>
-        /// Converts this type to a type that represents it's database model structure.
-        /// </summary>
-        /// <returns></returns>
+        public Person(int id, string name, double wallet)
+        {
+            this.ID = id;
+            this.Name = name;
+            this.Wallet = wallet;
+        }/// <summary>
+         /// Converts this type to a type that represents it's database model structure.
+         /// </summary>
+         /// <returns></returns>
         public PersonDbModel ToDbModel()
         {
             return new PersonDbModel

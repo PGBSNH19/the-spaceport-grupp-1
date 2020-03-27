@@ -59,17 +59,17 @@ namespace SpacePort
             return new SpaceShip(this.shipName, this.length, this.primaryKey, this.owner);
         }
 
-        public static SpaceShip BuildFromDb(int id)
-        {
-            SpaceParkContext context = new SpaceParkContext();
-            SpaceShipModel model = SpaceShipModel.CreateModelFromDb(id).Result;
-            Person person = PersonObjectBuilder.BuildFromDataBase(context.SpaceShip.Where(o => o.SpaceShipID == id).Select(p => p.Owner.PersonID).First());
-            return SpaceShipObjectBuilder
-                .ShipName(model.Name)
-                .AddLength(model.Length)
-                .AddOwner(person)
-                .AddShipID(model.SpaceShipID)
-                .BuildShip();
-        }
+        //public static SpaceShip BuildFromDb(int id)
+        //{
+        //    SpaceParkContext context = new SpaceParkContext();
+        //    SpaceshipDbModel model = SpaceshipDbModel.CreateModelFromDb(id).Result;
+        //    Person person = PersonObjectBuilder.BuildFromDataBase(context.SpaceshipInfo.Where(o => o.SpaceshipDbModelId == id).Select(p => p.PersonDbModelId).First());
+        //    return SpaceShipObjectBuilder
+        //        .ShipName(model.Name)
+        //        .AddLength(model.Length)
+        //        .AddOwner(person)
+        //        .AddShipID(model.SpaceShipID)
+        //        .BuildShip();
+        //}
     }
 }

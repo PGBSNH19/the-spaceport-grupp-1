@@ -46,6 +46,11 @@ namespace SpacePort
 
             return person;
         }
+
+        public Person CreateObjectFromModel()
+        {
+            return new Person(this.PersonDbModelId, this.Name, this.Wallet);
+        }
     }
 
     public class SpaceshipDbModel

@@ -45,24 +45,12 @@ namespace SpacePort
 
         public static Person BuildFromDataBase(int primaryKey)
         {
-            PersonModel dbModel = PersonModel.CreateModelFromDb(primaryKey).Result;
-
-            return PersonObjectBuilder
-                .AddName(dbModel.Name)
-                .AddWallet(dbModel.Wallet)
-                .AddID(dbModel.PersonID)
-                .BuildPerson();
+            return null;
         }
 
         public static Person BuildFromApi(int id)
         {
-            ApiDataFetch data = new ApiDataFetch();
-            var PersonData = data.GetPerson(id);
-
-            return PersonObjectBuilder
-                .AddName(PersonData.name)
-                .AddWallet(200.5)
-                .BuildPerson();
+            return null;
         }
     }
 }
