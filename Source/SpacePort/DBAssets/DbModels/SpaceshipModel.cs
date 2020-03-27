@@ -67,7 +67,6 @@ namespace SpacePort
                     Length = this.Length, 
                     Owner = this.PersonDbModel.CreateObjectFromModel() 
                 };
-                temp.SetID(this.SpaceshipDbModelId);
             }
             else
             {
@@ -77,6 +76,7 @@ namespace SpacePort
                     Length = this.Length
                 };
             }
+            temp.SetID(this.SpaceshipDbModelId);
 
             return temp;
         }
