@@ -45,7 +45,7 @@ namespace SpacePort
 
         public static Person BuildFromDataBase(int primaryKey)
         {
-            PersonModel dbModel = PersonModel.GetPersonDataById(primaryKey).Result;
+            PersonModel dbModel = PersonModel.CreateModelFromDb(primaryKey).Result;
 
             return PersonObjectBuilder
                 .AddName(dbModel.Name)

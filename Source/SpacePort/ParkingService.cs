@@ -8,17 +8,17 @@ namespace SpacePort
 {
     public class ParkingService
     {
-        private IParkingSpaceComponent[] parkingSpaces;
+        private ParkingSpace[] parkingSpaces;
         private readonly ApiDataFetch apiDataFetch;
 
         public ParkingService(int parkingSpaces)
         {
-            this.parkingSpaces = new IParkingSpaceComponent[parkingSpaces];
+            this.parkingSpaces = new ParkingSpace[parkingSpaces];
             this.apiDataFetch = new ApiDataFetch();
 
             for (int i = 0; i < this.parkingSpaces.Length; i++)
             {
-                this.parkingSpaces[i] = new ParkingSpaceComponent();
+                this.parkingSpaces[i] = new ParkingSpace();
             }
         }
 
@@ -35,7 +35,7 @@ namespace SpacePort
 
         public int NumberOfFreeParkingSpaces()
         {
-            return parkingSpaces.Where(p => p.IsOccupied() == false).Count();
+            return parkingSpaces.Where(p => p.Occupied == false).Count();
         }
     }
 }
