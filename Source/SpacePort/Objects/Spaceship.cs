@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SpacePort
 {
@@ -37,6 +39,21 @@ namespace SpacePort
             }
 
             return new SpaceshipDbModel();
+        }
+
+        public static async Task<List<Spaceship>> GetSpaceShipsAsync()
+        {
+            SpaceParkContext context = new SpaceParkContext();
+            List<Spaceship> spaceships = new List<Spaceship>();
+            var ids = context.SpaceshipInfo.Select(s => s.SpaceshipDbModelId).ToList();
+            for (int i = 0; i < ids.Count; i++)
+            {
+                SpaceshipDbModel model = await SpaceshipDbModel.CreateModelFromDb(ids[i]);
+                Spaceship spaceship = model.CreateObjectFromModel();
+                spaceships.Add(spaceship);
+            }
+            return spaceships;
+
         }
     }
 }

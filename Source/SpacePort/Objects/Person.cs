@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SpacePort
 {
@@ -32,6 +34,21 @@ namespace SpacePort
                 Name = this.Name,
                 Wallet = this.Wallet
             };
+        }
+
+        public static async Task<List<Person>> GetSpaceShipsAsync()
+        {
+            SpaceParkContext context = new SpaceParkContext();
+            List<Person> persons = new List<Person>();
+            var ids = context.PersonInfo.Select(s => s.PersonDbModelId).ToList();
+            for (int i = 0; i < ids.Count; i++)
+            {
+                PersonDbModel model = await PersonDbModel.CreateModelFromDb(ids[i]);
+                Person person = model.CreateObjectFromModel();
+                persons.Add(person);
+            }
+            return persons;
+
         }
     }
 }

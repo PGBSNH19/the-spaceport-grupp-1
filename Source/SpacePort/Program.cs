@@ -36,7 +36,10 @@ namespace SpacePort
             //    context.SaveChanges();
             //}
 
-            ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
+            //ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
+
+            List<Spaceship> spaceships = Spaceship.GetSpaceShipsAsync().Result;
+
         }
     }
 }
