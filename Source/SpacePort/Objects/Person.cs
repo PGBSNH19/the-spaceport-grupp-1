@@ -38,7 +38,7 @@ namespace SpacePort
             };
         }
 
-<<<<<<< HEAD
+
         public static async Task<List<Person>> GetSpaceShipsAsync()
         {
             SpaceParkContext context = new SpaceParkContext();
@@ -51,13 +51,14 @@ namespace SpacePort
                 persons.Add(person);
             }
             return persons;
+        }
 
-=======
+
         public static Person CreateObjectFromAPI(ApiDataFetch dataFetch, int searchIndex)
         {
             PersonData personData = dataFetch.GetPerson(searchIndex);
             return new Person(personData.name, 200);
->>>>>>> origin
+
         }
     }
 }

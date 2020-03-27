@@ -16,9 +16,14 @@ namespace SpacePort
             //Testing area!
             System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
 
+            List<ParkingSpace> parkingSpaces = new List<ParkingSpace>();
             List<Spaceship> Spaceships = new List<Spaceship>();
             ApiDataFetch apiFetch = new ApiDataFetch();
 
+            for (int i = 0; i < 3; i++)
+            {
+                parkingSpaces.Add(new ParkingSpace());
+            }
             int[] shipsAPInums = { 2, 3, 5, 9 };
             int[] personsAPInums = { 1, 2, 3, 4 };
 
@@ -26,9 +31,18 @@ namespace SpacePort
             {
                 Spaceships.Add(Spaceship.CreateObjectFromAPI(apiFetch, shipsAPInums[i]));
                 Spaceships.Last().Owner = Person.CreateObjectFromAPI(apiFetch, personsAPInums[i]);
-            }  
+            }
 
-
+            using (var context = new SpaceParkContext())
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    parkingSpaces[i].OccupyingSpaceship = Spaceships[i];
+                    
+                        context.ParkingSpaceInfo.Add(parkingSpaces[i].ToDbModel());
+                }
+                context.SaveChanges();
+            }
             
         }
 
@@ -53,18 +67,17 @@ namespace SpacePort
             //    context.SaveChanges();
             //}
 
-<<<<<<< HEAD
             //ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
 
             List<Spaceship> spaceships = Spaceship.GetSpaceShipsAsync().Result;
-=======
+
             ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
 
         }
 
         public void EraseAllTableEntries()
         {
->>>>>>> origin
+
 
         }
     }

@@ -41,7 +41,7 @@ namespace SpacePort
             return new SpaceshipDbModel();
         }
 
-<<<<<<< HEAD
+
         public static async Task<List<Spaceship>> GetSpaceShipsAsync()
         {
             SpaceParkContext context = new SpaceParkContext();
@@ -54,8 +54,8 @@ namespace SpacePort
                 spaceships.Add(spaceship);
             }
             return spaceships;
+        }
 
-=======
         public static Spaceship CreateObjectFromAPI(ApiDataFetch dataFetch, int searchIndex)
         {
             SpaceshipData spaceshipData = dataFetch.GetSpaceShip(searchIndex);
@@ -64,7 +64,7 @@ namespace SpacePort
                 Name = spaceshipData.name,
                 Length = double.Parse(spaceshipData.length)
             };
->>>>>>> origin
+
         }
     }
 }
