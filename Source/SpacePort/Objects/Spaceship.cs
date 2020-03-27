@@ -38,5 +38,15 @@ namespace SpacePort
 
             return new SpaceshipDbModel();
         }
+
+        public static Spaceship CreateObjectFromAPI(ApiDataFetch dataFetch, int searchIndex)
+        {
+            SpaceshipData spaceshipData = dataFetch.GetSpaceShip(searchIndex);
+            return new Spaceship
+            {
+                Name = spaceshipData.name,
+                Length = double.Parse(spaceshipData.length)
+            };
+        }
     }
 }

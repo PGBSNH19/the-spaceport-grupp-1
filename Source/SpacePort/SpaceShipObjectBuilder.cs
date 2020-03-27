@@ -13,7 +13,7 @@ namespace SpacePort
         IAddSpaceShipComponents AddShipName(string shipName);
         IAddSpaceShipComponents AddShipID(int primaryKey);
         IAddSpaceShipComponents AddOwner(Person owner);
-        SpaceShip BuildShip();
+        //SpaceShip BuildShip();
     }
 
     public class SpaceShipObjectBuilder : IAddSpaceShipComponents
@@ -54,10 +54,10 @@ namespace SpacePort
             return this;
         }
 
-        public SpaceShip BuildShip()
-        {
-            return new SpaceShip(this.shipName, this.length, this.primaryKey, this.owner);
-        }
+        //public SpaceShip BuildShip()
+        //{
+        //    return new SpaceShip(this.shipName, this.length, this.primaryKey, this.owner);
+        //}
 
         //public static SpaceShip BuildFromDb(int id)
         //{

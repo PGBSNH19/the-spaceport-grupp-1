@@ -16,7 +16,24 @@ namespace SpacePort
             //Testing area!
             System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
 
+            List<Spaceship> Spaceships = new List<Spaceship>();
+            ApiDataFetch apiFetch = new ApiDataFetch();
 
+            int[] shipsAPInums = { 2, 3, 5, 9 };
+            int[] personsAPInums = { 1, 2, 3, 4 };
+
+            for (int i = 0; i < shipsAPInums.Length; i++)
+            {
+                Spaceships.Add(Spaceship.CreateObjectFromAPI(apiFetch, shipsAPInums[i]));
+                Spaceships.Last().Owner = Person.CreateObjectFromAPI(apiFetch, personsAPInums[i]);
+            }  
+
+
+            
+        }
+
+        public void DbTesting()
+        {
             Person aronCederlund = new Person("Aron Cederlund", 200);
 
             Spaceship falcon = new Spaceship { Name = "Falcon", Length = 200, Owner = aronCederlund };
@@ -37,6 +54,12 @@ namespace SpacePort
             //}
 
             ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
+
+        }
+
+        public void EraseAllTableEntries()
+        {
+
         }
     }
 }

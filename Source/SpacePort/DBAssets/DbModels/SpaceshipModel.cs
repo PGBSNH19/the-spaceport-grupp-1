@@ -57,21 +57,28 @@ namespace SpacePort
 
         public Spaceship CreateObjectFromModel()
         {
+            Spaceship temp;
+
             if (this.PersonDbModel != null)
             {
-                return new Spaceship 
+                temp = new Spaceship 
                 { 
                     Name = this.Name, 
                     Length = this.Length, 
                     Owner = this.PersonDbModel.CreateObjectFromModel() 
                 };
+                temp.SetID(this.SpaceshipDbModelId);
+            }
+            else
+            {
+                temp = new Spaceship
+                {
+                    Name = this.Name,
+                    Length = this.Length
+                };
             }
 
-            return new Spaceship
-            {
-                Name = this.Name,
-                Length = this.Length
-            };
+            return temp;
         }
     }
 }

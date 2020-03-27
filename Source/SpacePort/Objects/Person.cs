@@ -21,7 +21,9 @@ namespace SpacePort
             this.ID = id;
             this.Name = name;
             this.Wallet = wallet;
-        }/// <summary>
+        }
+
+        /// <summary>
          /// Converts this type to a type that represents it's database model structure.
          /// </summary>
          /// <returns></returns>
@@ -32,6 +34,12 @@ namespace SpacePort
                 Name = this.Name,
                 Wallet = this.Wallet
             };
+        }
+
+        public static Person CreateObjectFromAPI(ApiDataFetch dataFetch, int searchIndex)
+        {
+            PersonData personData = dataFetch.GetPerson(searchIndex);
+            return new Person(personData.name, 200);
         }
     }
 }
