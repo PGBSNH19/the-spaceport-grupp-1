@@ -7,13 +7,13 @@ namespace SpacePort
 {
     public class SpaceParkContext : DbContext
     {
-        public DbSet<SpaceShipModel> SpaceShip { get; set; }
-        public DbSet<PersonModel> Person { get; set; }
-
+        public DbSet<SpaceshipDbModel> SpaceshipInfo { get; set; }
+        public DbSet<PersonDbModel> PersonInfo { get; set; }
+        public DbSet<ParkingSpaceDbModel> ParkingSpaceInfo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"server=DESKTOP-2IS2C3L\SQLEXPRESS;Database=SpacePortDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=LAPTOP-MGQ777UR\SQLEXPRESS; Database=TestDb1337; Trusted_Connection=True;");
         }
     }
 }
