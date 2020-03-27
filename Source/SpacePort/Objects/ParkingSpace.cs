@@ -10,6 +10,15 @@ namespace SpacePort
         public Spaceship OccupyingSpaceship { get; set; }
 
         /// <summary>
+        /// Warning: Set only when fetching from database!
+        /// </summary>
+        /// <param name="id"></param>
+        public void SetID(int id)
+        {
+            this.ID = id;
+        }
+
+        /// <summary>
         /// Converts this type to a type that represents it's database model structure.
         /// </summary>
         /// <returns></returns>

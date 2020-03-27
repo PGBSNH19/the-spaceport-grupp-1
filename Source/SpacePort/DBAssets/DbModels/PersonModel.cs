@@ -31,7 +31,7 @@ namespace SpacePort
             };
         }
 
-        public static async Task<PersonDbModel> GetPersonDataById(int id)
+        public static async Task<PersonDbModel> CreateModelFromDb(int id)
         {
             PersonDbModel person = null;
 

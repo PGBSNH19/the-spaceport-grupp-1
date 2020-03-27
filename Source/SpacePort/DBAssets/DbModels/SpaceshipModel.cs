@@ -43,7 +43,11 @@ namespace SpacePort
             {
                 Console.WriteLine("Start GetSpaceship...");
 
-                spaceShip = await context.SpaceshipInfo.Where(s => s.SpaceshipDbModelId == id).FirstOrDefaultAsync<SpaceshipDbModel>();
+                spaceShip = await context.SpaceshipInfo.FindAsync(id);
+                if (spaceShip.PersonDbModelId.HasValue)
+                {
+                    spaceShip.PersonDbModel = PersonDbModel.CreateModelFromDb(spaceShip.PersonDbModelId.Value).Result;
+                }
 
                 Console.WriteLine("Finished GetSpaceship...");
             }

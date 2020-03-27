@@ -26,11 +26,15 @@ namespace SpacePort
 
             using (var context = new SpaceParkContext())
             {
-                Console.WriteLine("Start GetSpaceship...");
+                Console.WriteLine("Start Getparking...");
 
-                parkingSpace = await context.ParkingSpaceInfo.Where(s => s.ParkingSpaceDbModelId == id).FirstOrDefaultAsync<ParkingSpaceDbModel>();
+                parkingSpace = await context.ParkingSpaceInfo.FindAsync(id);
+                if (parkingSpace.SpaceshipDbModelId.HasValue)
+                {
+                    parkingSpace.SpaceshipDbModel = SpaceshipDbModel.CreateModelFromDb(parkingSpace.SpaceshipDbModelId.Value).Result;
+                }
 
-                Console.WriteLine("Finished GetSpaceship...");
+                Console.WriteLine("Finished GetParking...");
             }
 
             return parkingSpace;
@@ -38,18 +42,15 @@ namespace SpacePort
 
         public ParkingSpace CreateObjectFromModel()
         {
+            ParkingSpace temp = new ParkingSpace();
+            temp.SetID(this.ParkingSpaceDbModelId);
+
             if (this.SpaceshipDbModel != null)
             {
-                ParkingSpace temp = new ParkingSpace();
-
-
-                return new ParkingSpace 
-                { 
-                    OccupyingSpaceship = this.SpaceshipDbModel.CreateObjectFromModel()
-                };
+                temp.OccupyingSpaceship = this.SpaceshipDbModel.CreateObjectFromModel();
             }
 
-            return new ParkingSpace();            
+            return temp;            
         }
     }
 }
