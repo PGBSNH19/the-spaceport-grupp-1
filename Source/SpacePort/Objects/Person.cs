@@ -39,7 +39,7 @@ namespace SpacePort
         }
 
 
-        public static async Task<List<Person>> GetSpaceShipsAsync()
+        public static async Task<List<Person>> GetPeopleAsync()
         {
             SpaceParkContext context = new SpaceParkContext();
             List<Person> persons = new List<Person>();

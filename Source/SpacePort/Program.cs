@@ -58,7 +58,7 @@ namespace SpacePort
             //List<ParkingSpace> ParkingSpaces = new List<ParkingSpace>();
             //ParkingSpaces.Add(new ParkingSpace { OccupyingSpaceship = falcon });
             //ParkingSpaces.Add(new ParkingSpace());
-
+            List<Person> persons = Person.GetPeopleAsync().Result;
             List<Spaceship> spaceships = Spaceship.GetSpaceShipsAsync().Result;
 
             //ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
