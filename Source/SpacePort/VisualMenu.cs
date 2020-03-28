@@ -35,24 +35,27 @@ namespace SpacePort
             this.person = new Person(name, 200);
             this.spaceship = SpaceshipDbModel.CreateModelFromDb(shipName).Result.CreateObjectFromModel();
             this.spaceship.Owner = this.person;
-            Menu(MenuOptions("Welcome to SpaceParkCorp",menuOptions), this.person, this.spaceship);
+            Menu(MenuOptions("Welcome to SpaceParkCorp", menuOptions), this.person, this.spaceship);
         }
 
         public void Menu(string menuOptions, Person person, Spaceship spaceship)
         {
             bool isRunning = true;
-            while(isRunning)
+            while (isRunning)
             {
-                switch(menuOptions)
+                switch (menuOptions)
                 {
                     case "check in":
-                        bool hej = spacePark.CheckIn(person, spaceship);
-                        Console.WriteLine(hej);
+                        PrintAllowedToPark(spacePark.CheckIn(person, spaceship));
                         isRunning = false;
                         break;
                     case "pay":
+                        PrintHasMoney(spacePark.ValidateCustomer(person.Wallet));
+                        isRunning = false;
                         break;
                     case "check out":
+                        spacePark.CheckOut(person, spaceship);
+                        isRunning = false;
                         break;
                     case "4":
                         break;
@@ -71,14 +74,14 @@ namespace SpacePort
             ConsoleKey? key = null;
             while (key != ConsoleKey.Enter)
             {
-                
+
                 if (key != null)
                 {
                     Console.CursorLeft = 0;
                     Console.CursorTop = Console.CursorTop - options.Length;
                 }
 
-                
+
                 for (int i = 0; i < options.Length; i++)
                 {
                     var option = options[i];
@@ -91,7 +94,7 @@ namespace SpacePort
                     Console.ResetColor();
                 }
 
-                
+
                 key = Console.ReadKey().Key;
                 if (key == ConsoleKey.DownArrow)
                 {
@@ -107,13 +110,34 @@ namespace SpacePort
             return options[selected];
         }
 
-        public void PrintAllowedToPark(bool allowed, string personName)
+        private void PrintAllowedToPark(bool allowed)
         {
-            if(allowed)
+            if (allowed)
             {
-
+                Console.WriteLine("We successfully parked your ship!");
             }
-            
+            else
+            {
+                Console.WriteLine("your ship did not meet the criterias");
+            }
+
+        }
+
+        private void PrintHasMoney(bool hasMoney)
+        {
+            if(hasMoney)
+            {
+                Console.WriteLine("has money");
+            }
+            else
+            {
+                Console.WriteLine("has no money");
+            }
+        }
+
+        private void PrintCheckout()
+        {
+
         }
     }
 }

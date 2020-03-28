@@ -18,18 +18,28 @@ namespace SpacePort
 
         public bool CheckIn(Person person, Spaceship spaceship)
         {
-            return parkingService.IsAllowedToPark(person, spaceship) && parkingService.FreeParkingSpace();
+            bool isAllowed = parkingService.IsAllowedToPark(person, spaceship) && parkingService.FreeParkingSpace();
+            if (isAllowed)
+            {
+                parkingService.ParkSpaceship(person, spaceship);
+            }
+            return isAllowed;
         }
 
-        public void CheckOut()
+        public bool CheckOut(Person person, Spaceship spaceship)
         {
-            throw new NotImplementedException();
+            parkingService.CreateInvoice()
         }
+
+        
 
         //Bank account methods
         public void Deposit(double amount)
         {
-            bankAccount.Deposit(amount);
+            if (ValidateCustomer(amount))
+            {
+                bankAccount.Deposit(amount);
+            }
         }
 
         public void Withdraw(double amount)
@@ -43,12 +53,17 @@ namespace SpacePort
         }
 
         //Parking control methods
-        
+
 
         public bool NumberOfFreeParkingSpaces()
         {
 
             return parkingService.FreeParkingSpace();
+        }
+
+        public bool ValidateCustomer(double amount)
+        {
+            return amount >= 100;
         }
     }
 }

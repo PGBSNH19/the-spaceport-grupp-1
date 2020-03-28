@@ -16,6 +16,7 @@ namespace SpacePort
         {
             this.apiDataFetch = new ApiDataFetch();
             this.parkingSpaces = ParkingSpace.GetParkingSpaceAsync(parkingSpaces).Result.ToArray();
+
             if (ParkingSpace.GetParkingSpaceAsync(parkingSpaces).Result.ToArray().Count() < 1)
             {
                 for (int i = 0; i < this.parkingSpaces.Length; i++)
@@ -27,7 +28,7 @@ namespace SpacePort
 
         public bool IsAllowedToPark(Person person, Spaceship spaceShip)
         {
-            return apiDataFetch.GetPeople(person.Name).count < 1 &&
+            return apiDataFetch.GetPeople(person.Name).count >= 1 &&
                         spaceShip.Length <= 120000;
         }
 
@@ -35,7 +36,27 @@ namespace SpacePort
         {
             using (var context = new SpaceParkContext())
             {
-                return parkingSpaces.Where(p => p.OccupyingSpaceship != null) != null;
+                return parkingSpaces.Where(p => p.OccupyingSpaceship == null) != null;
+            }
+        }
+
+        public void ParkSpaceship(Person person, Spaceship spaceship)
+        {
+            using(var context = new SpaceParkContext())
+            {
+                ParkingSpaceDbModel model = new ParkingSpaceDbModel();
+                model.SpaceshipDbModel = spaceship.ToDbModel();
+                context.ParkingSpaceInfo.Add(model);
+                context.SaveChanges();
+            }
+        }
+
+        public void CreateInvoice(Person person, Spaceship spaceship)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                ParkingSpaceDbModel model = new ParkingSpaceDbModel();
+                ParkingSpaceDbModel.
             }
         }
 
