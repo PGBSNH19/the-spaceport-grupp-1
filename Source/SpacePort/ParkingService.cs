@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using SpacePort;
+using System.Threading.Tasks;
 
 namespace SpacePort
 {
@@ -13,29 +14,31 @@ namespace SpacePort
 
         public ParkingService(int parkingSpaces)
         {
-            this.parkingSpaces = new ParkingSpace[parkingSpaces];
             this.apiDataFetch = new ApiDataFetch();
-
-            for (int i = 0; i < this.parkingSpaces.Length; i++)
+            this.parkingSpaces = ParkingSpace.GetParkingSpaceAsync(parkingSpaces).Result.ToArray();
+            if (ParkingSpace.GetParkingSpaceAsync(parkingSpaces).Result.ToArray().Count() < 1)
             {
-                this.parkingSpaces[i] = new ParkingSpace();
+                for (int i = 0; i < this.parkingSpaces.Length; i++)
+                {
+                    this.parkingSpaces[i] = new ParkingSpace();
+                }
             }
         }
 
         public bool IsAllowedToPark(Person person, Spaceship spaceShip)
         {
-            if (NumberOfFreeParkingSpaces() <= 0)
-            {
-                return false;
-            }
-
-            return apiDataFetch.GetPerson(person.Name).name != null &&
+            return apiDataFetch.GetPeople(person.Name).count < 1 &&
                         spaceShip.Length <= 120000;
         }
 
-        public int NumberOfFreeParkingSpaces()
+        public bool FreeParkingSpace()
         {
-            return parkingSpaces.Where(p => p.OccupyingSpaceship == null).Count();
+            using (var context = new SpaceParkContext())
+            {
+                return parkingSpaces.Where(p => p.OccupyingSpaceship != null) != null;
+            }
         }
+
+
     }
 }

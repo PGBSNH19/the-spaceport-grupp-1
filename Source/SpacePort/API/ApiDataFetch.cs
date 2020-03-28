@@ -73,6 +73,13 @@ namespace SpacePort
             var data = JsonConvert.DeserializeObject<PersonDataResults>(dataResponse.Result.Content);
             return data.results[0];
         }
+
+        public PersonDataResults GetPeople(string name)
+        {
+            var dataResponse = GetPersonResponse(name);
+            var data = JsonConvert.DeserializeObject<PersonDataResults>(dataResponse.Result.Content);
+            return data;
+        }
     }
 }
 

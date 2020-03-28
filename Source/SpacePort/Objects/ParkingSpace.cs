@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SpacePort
 {
@@ -33,6 +35,33 @@ namespace SpacePort
             }
 
             return new ParkingSpaceDbModel();
+        }
+        public static async Task<List<ParkingSpace>> GetParkingSpaceAsync()
+        {
+            SpaceParkContext context = new SpaceParkContext();
+            List<ParkingSpace> parkingSpaces = new List<ParkingSpace>();
+            var ids = context.PersonInfo.Select(s => s.PersonDbModelId).ToList();
+            for (int i = 0; i < ids.Count; i++)
+            {
+                ParkingSpaceDbModel model = await ParkingSpaceDbModel.CreateModelFromDb(ids[i]);
+                ParkingSpace parkingspace = model.CreateObjectFromModel();
+                parkingSpaces.Add(parkingspace);
+            }
+            return parkingSpaces;
+        }
+
+        public static async Task<ParkingSpace[]> GetParkingSpaceAsync(int count)
+        {
+            SpaceParkContext context = new SpaceParkContext();
+            ParkingSpace[] parkingSpaces = new ParkingSpace[count];
+            var ids = context.ParkingSpaceInfo.Select(s => s.ParkingSpaceDbModelId).ToList();
+            for (int i = 0; i < ids.Count && i < count; i++)
+            {
+                ParkingSpaceDbModel model = await ParkingSpaceDbModel.CreateModelFromDb(ids[i]);
+                ParkingSpace parkingspace = model.CreateObjectFromModel();
+                parkingSpaces[i] = parkingspace;
+            }
+            return parkingSpaces;
         }
     }
 }

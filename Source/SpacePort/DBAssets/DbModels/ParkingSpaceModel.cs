@@ -26,15 +26,11 @@ namespace SpacePort
 
             using (var context = new SpaceParkContext())
             {
-                Console.WriteLine("Start Getparking...");
-
                 parkingSpace = await context.ParkingSpaceInfo.FindAsync(id);
                 if (parkingSpace.SpaceshipDbModelId.HasValue)
                 {
                     parkingSpace.SpaceshipDbModel = SpaceshipDbModel.CreateModelFromDb(parkingSpace.SpaceshipDbModelId.Value).Result;
                 }
-
-                Console.WriteLine("Finished GetParking...");
             }
 
             return parkingSpace;

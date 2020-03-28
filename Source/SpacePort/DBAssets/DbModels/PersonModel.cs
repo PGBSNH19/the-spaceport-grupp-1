@@ -37,11 +37,7 @@ namespace SpacePort
 
             using (var context = new SpaceParkContext())
             {
-                Console.WriteLine("Start GetPerson...");
-
                 person = await context.PersonInfo.Where(s => s.PersonDbModelId == id).FirstOrDefaultAsync<PersonDbModel>();
-
-                Console.WriteLine("Finished GetPerson...");
             }
 
             return person;

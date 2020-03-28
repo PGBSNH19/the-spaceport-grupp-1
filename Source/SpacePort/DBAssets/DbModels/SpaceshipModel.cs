@@ -41,7 +41,7 @@ namespace SpacePort
 
             using (var context = new SpaceParkContext())
             {
-                Console.WriteLine("Start GetSpaceship...");
+                
 
                 spaceShip = await context.SpaceshipInfo.FindAsync(id);
                 if (spaceShip.PersonDbModelId.HasValue)
@@ -49,7 +49,25 @@ namespace SpacePort
                     spaceShip.PersonDbModel = PersonDbModel.CreateModelFromDb(spaceShip.PersonDbModelId.Value).Result;
                 }
 
-                Console.WriteLine("Finished GetSpaceship...");
+               
+            }
+
+            return spaceShip;
+        }
+
+        public static async Task<SpaceshipDbModel> CreateModelFromDb(string name)
+        {
+            SpaceshipDbModel spaceShip = null;
+
+            using (var context = new SpaceParkContext())
+            {
+
+
+                spaceShip = await context.SpaceshipInfo.FirstAsync(s => s.PersonDbModel == null && s.Name == name);
+                if (spaceShip.PersonDbModelId.HasValue)
+                {
+                    spaceShip.PersonDbModel = PersonDbModel.CreateModelFromDb(spaceShip.PersonDbModelId.Value).Result;
+                }
             }
 
             return spaceShip;

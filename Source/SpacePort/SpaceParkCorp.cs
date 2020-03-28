@@ -1,53 +1,54 @@
-﻿//using SpacePort;
-//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using SpacePort;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-//namespace SpacePort
-//{
-//    public class SpaceParkCorp
-//    {
-//        private IBankAccountComponent bankAccount;
-//        private ParkingService parkingService;
+namespace SpacePort
+{
+    public class SpaceParkCorp
+    {
+        private IBankAccountComponent bankAccount;
+        private ParkingService parkingService;
 
-//        public SpaceParkCorp(IBankAccountComponent bankAccount, ParkingService parkingService)
-//        {
-//            this.bankAccount = bankAccount;
-//            this.parkingService = new ParkingService(19);
-//        }
+        public SpaceParkCorp(IBankAccountComponent bankAccount, ParkingService parkingService)
+        {
+            this.bankAccount = bankAccount;
+            this.parkingService = parkingService;
+        }
 
-//        public void CheckOut()
-//        {
-//            throw new NotImplementedException();
-//        }
+        public bool CheckIn(Person person, Spaceship spaceship)
+        {
+            return parkingService.IsAllowedToPark(person, spaceship) && parkingService.FreeParkingSpace();
+        }
 
-//        //Bank account methods
-//        public void Deposit(double amount) 
-//        {
-//            bankAccount.Deposit(amount);
-//        }
+        public void CheckOut()
+        {
+            throw new NotImplementedException();
+        }
 
-//        public void Withdraw(double amount)
-//        {
-//            bankAccount.Withdraw(amount);
-//        }
+        //Bank account methods
+        public void Deposit(double amount)
+        {
+            bankAccount.Deposit(amount);
+        }
 
-//        public double CheckBalance()
-//        {
-//            return bankAccount.CheckBalance();
-//        }
+        public void Withdraw(double amount)
+        {
+            bankAccount.Withdraw(amount);
+        }
 
-//        //Parking control methods
-//        public bool IsAllowedToPark(Person person, SpaceShip spaceship)
-//        {
+        public double CheckBalance()
+        {
+            return bankAccount.CheckBalance();
+        }
 
-//            return parkingService.IsAllowedToPark(person, spaceship);
-//        }
+        //Parking control methods
+        
 
-//        public int NumberOfFreeParkingSpaces()
-//        {
-            
-//            return parkingService.NumberOfFreeParkingSpaces();
-//        }
-//    }
-//}
+        public bool NumberOfFreeParkingSpaces()
+        {
+
+            return parkingService.FreeParkingSpace();
+        }
+    }
+}
