@@ -8,7 +8,7 @@ namespace SpacePort
 {
     public class ParkingSpace
     {
-        public int ID { get; private set; }
+        public int ParkingSpaceID { get; private set; }
         public Spaceship OccupyingSpaceship { get; set; }
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace SpacePort
         /// <param name="id"></param>
         public void SetID(int id)
         {
-            this.ID = id;
+            this.ParkingSpaceID = id;
         }
 
         /// <summary>

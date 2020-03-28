@@ -37,6 +37,7 @@ namespace SpacePort
                     PersonDbModel = Owner.ToDbModel()
                 };
             }
+            SetID(this.ID);
 
             return new SpaceshipDbModel();
         }

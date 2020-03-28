@@ -26,9 +26,9 @@ namespace SpacePort
             return isAllowed;
         }
 
-        public bool CheckOut(Person person, Spaceship spaceship)
+        public bool CheckOut(Spaceship spaceship)
         {
-            parkingService.CreateInvoice()
+            return parkingService.DepartSpaceShip(spaceship);
         }
 
         

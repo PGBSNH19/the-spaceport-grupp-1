@@ -36,22 +36,6 @@ namespace SpacePort
             return parkingSpace;
         }
 
-        public static async Task<ParkingSpaceDbModel> CreateModelFromDb(Person person, Spaceship spaceship)
-        {
-            ParkingSpaceDbModel parkingSpace = null;
-
-            using (var context = new SpaceParkContext())
-            {
-                parkingSpace = await context.ParkingSpaceInfo.
-                if (parkingSpace.SpaceshipDbModelId.HasValue)
-                {
-                    parkingSpace.SpaceshipDbModel = SpaceshipDbModel.CreateModelFromDb(parkingSpace.SpaceshipDbModelId.Value).Result;
-                }
-            }
-
-            return parkingSpace;
-        }
-
         public ParkingSpace CreateObjectFromModel()
         {
             ParkingSpace temp = new ParkingSpace();

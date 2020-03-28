@@ -47,14 +47,14 @@ namespace SpacePort
                 {
                     case "check in":
                         PrintAllowedToPark(spacePark.CheckIn(person, spaceship));
-                        isRunning = false;
+                        menuOptions = "pay";
                         break;
                     case "pay":
                         PrintHasMoney(spacePark.ValidateCustomer(person.Wallet));
-                        isRunning = false;
+                        menuOptions = "check out";
                         break;
                     case "check out":
-                        spacePark.CheckOut(person, spaceship);
+                        spacePark.CheckOut(spaceship);
                         isRunning = false;
                         break;
                     case "4":
@@ -137,7 +137,7 @@ namespace SpacePort
 
         private void PrintCheckout()
         {
-
+            
         }
     }
 }

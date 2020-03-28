@@ -42,22 +42,34 @@ namespace SpacePort
 
         public void ParkSpaceship(Person person, Spaceship spaceship)
         {
+            
             using(var context = new SpaceParkContext())
             {
-                ParkingSpaceDbModel model = new ParkingSpaceDbModel();
-                model.SpaceshipDbModel = spaceship.ToDbModel();
-                context.ParkingSpaceInfo.Add(model);
+                var all = from c in context.ParkingSpaceInfo select c;
+                context.ParkingSpaceInfo.RemoveRange(all);
                 context.SaveChanges();
+                ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship == null).First();
+                parkingSpace.OccupyingSpaceship = spaceship;
+                
+            }
+            
+        }
+
+        public bool DepartSpaceShip(Spaceship spaceship)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                ParkingSpaceDbModel model = parkingSpaces.Where(p => p.OccupyingSpaceship.ID == spaceship.ID).First().ToDbModel();
+                
+                
+                context.SaveChanges();
+                return true;
             }
         }
 
         public void CreateInvoice(Person person, Spaceship spaceship)
         {
-            using (var context = new SpaceParkContext())
-            {
-                ParkingSpaceDbModel model = new ParkingSpaceDbModel();
-                ParkingSpaceDbModel.
-            }
+            
         }
 
 
