@@ -17,9 +17,9 @@ namespace SpacePort
             System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             
             SpaceParkCorp spacePark = new SpaceParkCorp(new BankAccountComponent(), new ParkingService(4));
-            string[] menuOptions = { "check in", "pay", "checkout" };
+            string[] menuOptions = { "check in", "pay", "check out" };
             VisualMenu menu = new VisualMenu(spacePark, menuOptions);
-            
+
             menu.Start();
         }
 
@@ -27,10 +27,10 @@ namespace SpacePort
         {
             using (var context = new SpaceParkContext())
             {
-                context.SpaceshipInfo.Add(SpaceshipDbModel.CreateModelFromAPI(new ApiDataFetch(), 13));
-                context.SpaceshipInfo.Add(SpaceshipDbModel.CreateModelFromAPI(new ApiDataFetch(), 15));
+                context.Spaceship.Add(SpaceshipModel.CreateModelFromAPI(new ApiDataFetch(), 13));
+                context.Spaceship.Add(SpaceshipModel.CreateModelFromAPI(new ApiDataFetch(), 15));
 
-                context.SpaceshipInfo.Add(SpaceshipDbModel.CreateModelFromAPI(new ApiDataFetch(), 10));
+                context.Spaceship.Add(SpaceshipModel.CreateModelFromAPI(new ApiDataFetch(), 10));
                 context.SaveChanges();
             }
         }

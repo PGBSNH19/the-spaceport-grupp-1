@@ -26,12 +26,12 @@ namespace SpacePort
         }
 
         /// <summary>
-         /// Converts this type to a type that represents it's database model structure.
-         /// </summary>
-         /// <returns></returns>
-        public PersonDbModel ToDbModel()
+        /// Converts this type to a type that represents it's database model structure.
+        /// </summary>
+        /// <returns></returns>
+        public PersonModel ToDbModel()
         {
-            return new PersonDbModel
+            return new PersonModel
             {
                 Name = this.Name,
                 Wallet = this.Wallet
@@ -43,10 +43,10 @@ namespace SpacePort
         {
             SpaceParkContext context = new SpaceParkContext();
             List<Person> persons = new List<Person>();
-            var ids = context.PersonInfo.Select(s => s.PersonDbModelId).ToList();
+            var ids = context.Person.Select(s => s.PersonID).ToList();
             for (int i = 0; i < ids.Count; i++)
             {
-                PersonDbModel model = await PersonDbModel.CreateModelFromDb(ids[i]);
+                PersonModel model = await PersonModel.CreateModelFromDb(ids[i]);
                 Person person = model.CreateObjectFromModel();
                 persons.Add(person);
             }
@@ -58,7 +58,23 @@ namespace SpacePort
         {
             PersonData personData = dataFetch.GetPerson(searchIndex);
             return new Person(personData.name, 200);
+        }
 
+        public static void AddPersonToDb(Person person)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                context.Add(person.ToDbModel());
+                context.SaveChanges();
+            }
+        }
+        public static bool PersonExistInDb(Person person)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                bool uniquePerson = context.Person.Where(p => p.Name == person.Name).FirstOrDefault() == null;
+                return uniquePerson;
+            }
         }
     }
 }

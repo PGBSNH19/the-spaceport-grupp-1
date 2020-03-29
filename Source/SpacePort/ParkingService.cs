@@ -11,12 +11,10 @@ namespace SpacePort
     {
         private ParkingSpace[] parkingSpaces;
         private readonly ApiDataFetch apiDataFetch;
-
         public ParkingService(int parkingSpaces)
         {
             this.apiDataFetch = new ApiDataFetch();
             this.parkingSpaces = ParkingSpace.GetParkingSpaceAsync(parkingSpaces).Result.ToArray();
-
             if (ParkingSpace.GetParkingSpaceAsync(parkingSpaces).Result.ToArray().Count() < 1)
             {
                 for (int i = 0; i < this.parkingSpaces.Length; i++)
@@ -26,10 +24,14 @@ namespace SpacePort
             }
         }
 
-        public bool IsAllowedToPark(Person person, Spaceship spaceShip)
+        public bool AllowedPerson(Person person)
         {
-            return apiDataFetch.GetPeople(person.Name).count >= 1 &&
-                        spaceShip.Length <= 120000;
+            return apiDataFetch.GetPeople(person.Name).count >= 1;
+        }
+
+        public bool AllowedShipLength(Spaceship spaceship)
+        {
+            return spaceship.Length <= 120000;
         }
 
         public bool FreeParkingSpace()
@@ -45,11 +47,12 @@ namespace SpacePort
             
             using(var context = new SpaceParkContext())
             {
-                var all = from c in context.ParkingSpaceInfo select c;
-                context.ParkingSpaceInfo.RemoveRange(all);
-                context.SaveChanges();
                 ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship == null).First();
                 parkingSpace.OccupyingSpaceship = spaceship;
+                var parkSpace = context.Parkingspace.Where(p => p.ParkingSpaceID == parkingSpace.ParkingSpaceID).First();
+                parkSpace.Spaceship = spaceship.ToDbModel();
+                
+                context.SaveChanges();
                 
             }
             
@@ -59,19 +62,15 @@ namespace SpacePort
         {
             using (var context = new SpaceParkContext())
             {
-                ParkingSpaceDbModel model = parkingSpaces.Where(p => p.OccupyingSpaceship.ID == spaceship.ID).First().ToDbModel();
-                
-                
+                ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship == spaceship).First();
+                parkingSpace.OccupyingSpaceship = null;
+
+                var parkSpace = context.Parkingspace.Where(p => p.ParkingSpaceID == parkingSpace.ParkingSpaceID).First();
+                parkSpace.Spaceship = null;
+                parkSpace.SpaceshipID = null;
                 context.SaveChanges();
                 return true;
             }
         }
-
-        public void CreateInvoice(Person person, Spaceship spaceship)
-        {
-            
-        }
-
-
     }
 }

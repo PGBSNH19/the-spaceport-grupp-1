@@ -9,35 +9,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SpacePort
 {
-    public class PersonDbModel
+    public class PersonModel
     {
         [Key]
-        public int PersonDbModelId { get; private set; }
+        public int PersonID { get; private set; }
         [MaxLength(50)]
         public string Name { get; set; }
         public double Wallet { get; set; }
 
         //Relationships
-        public SpaceshipDbModel SpaceshipDbModel { get; set; }
+        public SpaceshipModel Spaceship { get; set; }
 
         //Methods
-        public PersonDbModel CreateModelFromAPI(ApiDataFetch dataFetch, int searchIndex)
+        public PersonModel CreateModelFromAPI(ApiDataFetch dataFetch, int searchIndex)
         {
             PersonData personData = dataFetch.GetPerson(searchIndex);
-            return new PersonDbModel
+            return new PersonModel
             {
                 Name = personData.name,
                 Wallet = 300
             };
         }
 
-        public static async Task<PersonDbModel> CreateModelFromDb(int id)
+        public static async Task<PersonModel> CreateModelFromDb(int id)
         {
-            PersonDbModel person = null;
+            PersonModel person = null;
 
             using (var context = new SpaceParkContext())
             {
-                person = await context.PersonInfo.Where(s => s.PersonDbModelId == id).FirstOrDefaultAsync<PersonDbModel>();
+                person = await context.Person.Where(s => s.PersonID == id).FirstOrDefaultAsync<PersonModel>();
             }
 
             return person;
@@ -45,7 +45,7 @@ namespace SpacePort
 
         public Person CreateObjectFromModel()
         {
-            return new Person(this.PersonDbModelId, this.Name, this.Wallet);
+            return new Person(this.PersonID, this.Name, this.Wallet);
         }
     }
 }

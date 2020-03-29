@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading;
 
 namespace SpacePort
 {
@@ -9,55 +10,59 @@ namespace SpacePort
     {
         private SpaceParkCorp spacePark;
         private List<Spaceship> spaceships;
-        private List<Person> people;
         private string[] menuOptions;
         private Person person;
         private Spaceship spaceship;
-        public VisualMenu(SpaceParkCorp spacePark, List<Person> people, List<Spaceship> spaceships, string[] menuOptions)
-        {
-            this.spacePark = spacePark;
-            this.people = people;
-            this.spaceships = spaceships;
-            this.menuOptions = menuOptions;
-        }
+        private List<string> EventLog;
+
         public VisualMenu(SpaceParkCorp spacePark, string[] menuOptions)
         {
             this.spacePark = spacePark;
-            this.people = Person.GetPeopleAsync().Result;
             this.spaceships = Spaceship.GetSpaceShipsAsync().Result;
             this.menuOptions = menuOptions;
+            this.EventLog = new List<string>();
         }
         public void Start()
         {
             Console.Write("Enter your name: ");
             string name = Console.ReadLine();
-            string shipName = MenuOptions("Select your spaceship:", spaceships.Where(s => s.Owner == null).Select(s => s.Name).ToArray());
-            this.person = new Person(name, 200);
-            this.spaceship = SpaceshipDbModel.CreateModelFromDb(shipName).Result.CreateObjectFromModel();
-            this.spaceship.Owner = this.person;
-            Menu(MenuOptions("Welcome to SpaceParkCorp", menuOptions), this.person, this.spaceship);
+            if (PrintValidateIntegrity(ValidateIntegrity(name)))
+            {
+                Menu(MenuOptions("Welcome to SpaceParkCorp", menuOptions), this.person, this.spaceship);
+            }
+
         }
 
-        public void Menu(string menuOptions, Person person, Spaceship spaceship)
+        public void Menu(string menuOption, Person person, Spaceship spaceship)
         {
             bool isRunning = true;
             while (isRunning)
             {
-                switch (menuOptions)
+                switch (menuOption)
                 {
                     case "check in":
-                        PrintAllowedToPark(spacePark.CheckIn(person, spaceship));
-                        menuOptions = "pay";
-                        break;
-                    case "pay":
-                        PrintHasMoney(spacePark.ValidateCustomer(person.Wallet));
-                        menuOptions = "check out";
-                        break;
-                    case "check out":
-                        spacePark.CheckOut(spaceship);
+                        if (PrintAllowedToPark(spacePark.CheckIn(person, spaceship, EventLog)))
+                        {
+                            Menu(MenuOptions("pay", this.menuOptions), person, spaceship);
+                        }
                         isRunning = false;
                         break;
-                    case "4":
+                    case "pay":
+                        if (PrintHasMoney(spacePark.ValidateCustomerPayment(person, spaceship, EventLog)))
+                        {
+                            Menu(MenuOptions("check out", this.menuOptions), person, spaceship);
+                        }
+                        isRunning = false;
+                        break;
+                    case "check out":
+                        if (PrintCheckout(spacePark.CheckOut(spaceship, this.EventLog)))
+                        {
+                            isRunning = false;
+                        }
+                        else
+                        {
+                            Menu(MenuOptions("check out", this.menuOptions), person, spaceship);
+                        }
                         break;
                 }
             }
@@ -109,35 +114,70 @@ namespace SpacePort
             Console.CursorVisible = true;
             return options[selected];
         }
-
-        private void PrintAllowedToPark(bool allowed)
+        public bool ValidateIntegrity(string name)
         {
-            if (allowed)
+            this.person = new Person(name, 200);
+            bool isValid = Person.PersonExistInDb(this.person);
+            if (isValid)
             {
-                Console.WriteLine("We successfully parked your ship!");
+                string shipName = MenuOptions("Select your spaceship:", spaceships.Where(s => s.Owner == null).Select(s => s.Name).ToArray());
+                this.spaceship = SpaceshipModel.CreateModelFromDb(shipName).Result.CreateObjectFromModel();
+                this.spaceship.Owner = this.person;
+                return isValid;
             }
-            else
+            return isValid;
+        }
+
+        private bool PrintAllowedToPark(bool allowed)
+        {
+            foreach (var log in this.EventLog)
             {
-                Console.WriteLine("your ship did not meet the criterias");
+                Console.WriteLine(log);
+                Thread.Sleep(00);
             }
+            this.EventLog = new List<string>();
+            Console.ReadKey();
+            return allowed;
+        }
+
+        private bool PrintHasMoney(bool hasMoney)
+        {
+            foreach (var log in this.EventLog)
+            {
+                Console.WriteLine(log);
+                Thread.Sleep(500);
+            }
+            this.EventLog = new List<string>();
+            Console.ReadKey();
+            return hasMoney;
 
         }
 
-        private void PrintHasMoney(bool hasMoney)
+        public bool PrintValidateIntegrity(bool isValid)
         {
-            if(hasMoney)
+            if (isValid)
             {
-                Console.WriteLine("has money");
+                Console.WriteLine("Your name is valid");
             }
             else
             {
-                Console.WriteLine("has no money");
+                Console.WriteLine("Your name is already in use, are u scammer?!!");
             }
+            return isValid;
         }
-
-        private void PrintCheckout()
+        private bool PrintCheckout(bool isCheckedOut)
         {
-            
+            if (isCheckedOut)
+            {
+                Console.WriteLine("We did successfully check you out");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong with the checkout");
+            }
+            Console.ReadKey();
+            return isCheckedOut;
+
         }
     }
 }

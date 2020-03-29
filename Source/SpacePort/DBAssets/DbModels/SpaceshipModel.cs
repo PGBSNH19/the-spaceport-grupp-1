@@ -9,44 +9,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SpacePort
 {
-    public class SpaceshipDbModel
+    public class SpaceshipModel
     {
         [Key]
-        public int SpaceshipDbModelId { get; private set; }
+        public int SpaceshipID { get; private set; }
         [MaxLength(50)]
         public string Name { get; set; }
         public double Length { get; set; }
 
         //Relationships
-        public int? PersonDbModelId { get; set; }
-        [ForeignKey("PersonDbModelId")]
-        public PersonDbModel PersonDbModel { get; set; }
+        public int? PersonID { get; set; }
+        [ForeignKey("PersonID")]
+        public PersonModel Person { get; set; }
 
-        public ParkingSpaceDbModel ParkingSpaceDbModel { get; set; }
+        public ParkingSpaceModel ParkingSpaceModel { get; set; }
 
         //Methods
-        public static SpaceshipDbModel CreateModelFromAPI(ApiDataFetch dataFetch, int searchIndex)
+        public static SpaceshipModel CreateModelFromAPI(ApiDataFetch dataFetch, int searchIndex)
         {
             SpaceshipData spaceshipData = dataFetch.GetSpaceShip(searchIndex);
-            return new SpaceshipDbModel
+            return new SpaceshipModel
             {
                 Name = spaceshipData.name,
                 Length = double.Parse(spaceshipData.length),
             };
         }
 
-        public static async Task<SpaceshipDbModel> CreateModelFromDb(int id)
+        public static async Task<SpaceshipModel> CreateModelFromDb(int id)
         {
-            SpaceshipDbModel spaceShip = null;
+            SpaceshipModel spaceShip = null;
 
             using (var context = new SpaceParkContext())
             {
                 
 
-                spaceShip = await context.SpaceshipInfo.FindAsync(id);
-                if (spaceShip.PersonDbModelId.HasValue)
+                spaceShip = await context.Spaceship.FindAsync(id);
+                if (spaceShip.PersonID.HasValue)
                 {
-                    spaceShip.PersonDbModel = PersonDbModel.CreateModelFromDb(spaceShip.PersonDbModelId.Value).Result;
+                    spaceShip.Person = PersonModel.CreateModelFromDb(spaceShip.PersonID.Value).Result;
                 }
 
                
@@ -55,18 +55,18 @@ namespace SpacePort
             return spaceShip;
         }
 
-        public static async Task<SpaceshipDbModel> CreateModelFromDb(string name)
+        public static async Task<SpaceshipModel> CreateModelFromDb(string name)
         {
-            SpaceshipDbModel spaceShip = null;
+            SpaceshipModel spaceShip = null;
 
             using (var context = new SpaceParkContext())
             {
 
 
-                spaceShip = await context.SpaceshipInfo.FirstAsync(s => s.PersonDbModel == null && s.Name == name);
-                if (spaceShip.PersonDbModelId.HasValue)
+                spaceShip = await context.Spaceship.FirstAsync(s => s.Person == null && s.Name == name);
+                if (spaceShip.PersonID.HasValue)
                 {
-                    spaceShip.PersonDbModel = PersonDbModel.CreateModelFromDb(spaceShip.PersonDbModelId.Value).Result;
+                    spaceShip.Person = PersonModel.CreateModelFromDb(spaceShip.PersonID.Value).Result;
                 }
             }
 
@@ -77,13 +77,13 @@ namespace SpacePort
         {
             Spaceship temp;
 
-            if (this.PersonDbModel != null)
+            if (this.Person != null)
             {
                 temp = new Spaceship 
                 { 
                     Name = this.Name, 
                     Length = this.Length, 
-                    Owner = this.PersonDbModel.CreateObjectFromModel() 
+                    Owner = this.Person.CreateObjectFromModel() 
                 };
             }
             else
@@ -94,7 +94,7 @@ namespace SpacePort
                     Length = this.Length
                 };
             }
-            temp.SetID(this.SpaceshipDbModelId);
+            temp.SetID(this.SpaceshipID);
 
             return temp;
         }
