@@ -26,9 +26,9 @@ namespace SpacePort
         }
 
         /// <summary>
-         /// Converts this type to a type that represents it's database model structure.
-         /// </summary>
-         /// <returns></returns>
+        /// Converts this type to a type that represents it's database model structure.
+        /// </summary>
+        /// <returns></returns>
         public PersonDbModel ToDbModel()
         {
             return new PersonDbModel
@@ -38,8 +38,12 @@ namespace SpacePort
             };
         }
 
+<<<<<<< HEAD
 
         public static async Task<List<Person>> GetPeopleAsync()
+=======
+        public static async Task<List<Person>> GetSpaceShipsAsync()
+>>>>>>> @Gerglamesh
         {
             SpaceParkContext context = new SpaceParkContext();
             List<Person> persons = new List<Person>();
@@ -54,11 +58,20 @@ namespace SpacePort
         }
 
 
+<<<<<<< HEAD
+=======
+        }
+
+>>>>>>> @Gerglamesh
         public static Person CreateObjectFromAPI(ApiDataFetch dataFetch, int searchIndex)
         {
             PersonData personData = dataFetch.GetPerson(searchIndex);
             return new Person(personData.name, 200);
+<<<<<<< HEAD
 
+=======
+>>>>>>> @Gerglamesh
         }
     }
 }
+

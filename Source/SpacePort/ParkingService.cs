@@ -29,7 +29,7 @@
 //                return false;
 //            }
 
-//            return apiDataFetch.GetPerson(person.Name).name != null && 
+//            return apiDataFetch.GetPerson(person.Name).name != null &&
 //                        spaceShip.Length <= 120000;
 //        }
 

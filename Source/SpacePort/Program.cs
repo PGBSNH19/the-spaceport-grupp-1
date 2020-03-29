@@ -63,11 +63,20 @@ namespace SpacePort
 
             //ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
 
+<<<<<<< HEAD
+=======
+            List<Spaceship> spaceships = Spaceship.GetSpaceShipsAsync().Result;
+            ParkingSpace newPark = ParkingSpaceDbModel.CreateModelFromDb(2).Result.CreateObjectFromModel();
+
+>>>>>>> @Gerglamesh
         }
 
         public void EraseAllTableEntries()
         {
+<<<<<<< HEAD
             
+=======
+>>>>>>> @Gerglamesh
 
         }
     }

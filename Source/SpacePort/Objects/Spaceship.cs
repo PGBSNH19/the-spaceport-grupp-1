@@ -41,7 +41,10 @@ namespace SpacePort
             return new SpaceshipDbModel();
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> @Gerglamesh
         public static async Task<List<Spaceship>> GetSpaceShipsAsync()
         {
             SpaceParkContext context = new SpaceParkContext();
@@ -64,7 +67,11 @@ namespace SpacePort
                 Name = spaceshipData.name,
                 Length = double.Parse(spaceshipData.length)
             };
+<<<<<<< HEAD
 
+=======
+>>>>>>> @Gerglamesh
         }
     }
 }
+
