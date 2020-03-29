@@ -22,8 +22,6 @@ namespace SpacePort
         [ForeignKey("PersonID")]
         public PersonModel Person { get; set; }
 
-        public ParkingSpaceModel ParkingSpaceModel { get; set; }
-
         //Methods
         public static SpaceshipModel CreateModelFromAPI(ApiDataFetch dataFetch, int searchIndex)
         {

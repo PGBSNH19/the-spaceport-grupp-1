@@ -44,10 +44,14 @@ namespace SpacePort
 
         public void ParkSpaceship(Person person, Spaceship spaceship)
         {
-            
+            if(parkingSpaces.Length < 1)
+            {
+                return;
+            }
             using(var context = new SpaceParkContext())
             {
-                ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship == null).First();
+                spaceship.Owner = person;
+                ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship == null).FirstOrDefault();
                 parkingSpace.OccupyingSpaceship = spaceship;
                 var parkSpace = context.Parkingspace.Where(p => p.ParkingSpaceID == parkingSpace.ParkingSpaceID).First();
                 parkSpace.Spaceship = spaceship.ToDbModel();
@@ -58,17 +62,19 @@ namespace SpacePort
             
         }
 
-        public bool DepartSpaceShip(Spaceship spaceship)
+        public bool DepartSpaceShip(Spaceship spaceship, Person person)
         {
             using (var context = new SpaceParkContext())
             {
-                ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship == spaceship).First();
+                ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship.SpaceshipID == spaceship.SpaceshipID).First();
                 parkingSpace.OccupyingSpaceship = null;
-
                 var parkSpace = context.Parkingspace.Where(p => p.ParkingSpaceID == parkingSpace.ParkingSpaceID).First();
                 parkSpace.Spaceship = null;
                 parkSpace.SpaceshipID = null;
+                
                 context.SaveChanges();
+                Spaceship.DeleteSpaceshipFromDb(spaceship);
+                Person.DeletePersonFromDb(person);
                 return true;
             }
         }

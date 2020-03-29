@@ -55,7 +55,7 @@ namespace SpacePort
                         isRunning = false;
                         break;
                     case "check out":
-                        if (PrintCheckout(spacePark.CheckOut(spaceship, this.EventLog)))
+                        if (PrintCheckout(spacePark.CheckOut(spaceship, this.EventLog, person)))
                         {
                             isRunning = false;
                         }
@@ -177,7 +177,6 @@ namespace SpacePort
             }
             Console.ReadKey();
             return isCheckedOut;
-
         }
     }
 }
