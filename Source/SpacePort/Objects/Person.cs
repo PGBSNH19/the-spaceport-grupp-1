@@ -29,48 +29,36 @@ namespace SpacePort
         /// Converts this type to a type that represents it's database model structure.
         /// </summary>
         /// <returns></returns>
-        public PersonDbModel ToDbModel()
+        public PersonModel ToDbModel()
         {
-            return new PersonDbModel
+            return new PersonModel
             {
                 Name = this.Name,
                 Wallet = this.Wallet
             };
         }
 
-<<<<<<< HEAD
-
-        public static async Task<List<Person>> GetPeopleAsync()
-=======
-        public static async Task<List<Person>> GetSpaceShipsAsync()
->>>>>>> @Gerglamesh
-        {
-            SpaceParkContext context = new SpaceParkContext();
-            List<Person> persons = new List<Person>();
-            var ids = context.PersonInfo.Select(s => s.PersonDbModelId).ToList();
-            for (int i = 0; i < ids.Count; i++)
-            {
-                PersonDbModel model = await PersonDbModel.CreateModelFromDb(ids[i]);
-                Person person = model.CreateObjectFromModel();
-                persons.Add(person);
-            }
-            return persons;
-        }
-
-
-<<<<<<< HEAD
-=======
-        }
-
->>>>>>> @Gerglamesh
         public static Person CreateObjectFromAPI(ApiDataFetch dataFetch, int searchIndex)
         {
             PersonData personData = dataFetch.GetPerson(searchIndex);
             return new Person(personData.name, 200);
-<<<<<<< HEAD
+        }
 
-=======
->>>>>>> @Gerglamesh
+        public static void AddPersonToDb(Person person)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                context.Add(person.ToDbModel());
+                context.SaveChanges();
+            }
+        }
+        public static bool PersonExistInDb(Person person)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                bool uniquePerson = context.Person.Where(p => p.Name == person.Name).FirstOrDefault() == null;
+                return uniquePerson;
+            }
         }
     }
 }

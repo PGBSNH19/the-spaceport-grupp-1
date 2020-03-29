@@ -8,7 +8,7 @@ namespace SpacePort
 {
     public class Spaceship
     {
-        public int ID { get; private set; }
+        public int SpaceshipID { get; private set; }
         public string Name { get; set; }
         public double Length { get; set; }
         public Person Owner { get; set; }
@@ -19,40 +19,37 @@ namespace SpacePort
         /// <param name="id"></param>
         public void SetID(int id)
         {
-            this.ID = id;
+            this.SpaceshipID = id;
         }
 
         /// <summary>
         /// Converts this type to a type that represents it's database model structure.
         /// </summary>
         /// <returns></returns>
-        public SpaceshipDbModel ToDbModel()
+        public SpaceshipModel ToDbModel()
         {
             if (Owner != null)
             {
-                return new SpaceshipDbModel
+                return new SpaceshipModel
                 {
                     Name = this.Name,
                     Length = this.Length,
-                    PersonDbModel = Owner.ToDbModel()
+                    Person = Owner.ToDbModel()
                 };
             }
+            SetID(this.SpaceshipID);
 
-            return new SpaceshipDbModel();
+            return new SpaceshipModel();
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> @Gerglamesh
         public static async Task<List<Spaceship>> GetSpaceShipsAsync()
         {
             SpaceParkContext context = new SpaceParkContext();
             List<Spaceship> spaceships = new List<Spaceship>();
-            var ids = context.SpaceshipInfo.Select(s => s.SpaceshipDbModelId).ToList();
+            var ids = context.Spaceship.Select(s => s.SpaceshipID).ToList();
             for (int i = 0; i < ids.Count; i++)
             {
-                SpaceshipDbModel model = await SpaceshipDbModel.CreateModelFromDb(ids[i]);
+                SpaceshipModel model = await SpaceshipModel.CreateModelFromDb(ids[i]);
                 Spaceship spaceship = model.CreateObjectFromModel();
                 spaceships.Add(spaceship);
             }
@@ -67,10 +64,17 @@ namespace SpacePort
                 Name = spaceshipData.name,
                 Length = double.Parse(spaceshipData.length)
             };
-<<<<<<< HEAD
+        }
 
-=======
->>>>>>> @Gerglamesh
+        public static void AddSpaceShipToDb(Spaceship spaceship, Person person)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                var spaceshipModel = context.Spaceship.Where(s => s.SpaceshipID == spaceship.SpaceshipID).First();
+                spaceshipModel.Person = person.ToDbModel();
+                context.SaveChanges();
+
+            }
         }
     }
 }

@@ -9,32 +9,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SpacePort
 {
-    public class ParkingSpaceDbModel
+    public class ParkingSpaceModel
     {
         [Key]
-        public int ParkingSpaceDbModelId { get; private set; }
+        public int ParkingSpaceID { get; private set; }
 
         //Relationships
-        public int? SpaceshipDbModelId { get; set; }
-        [ForeignKey("SpaceshipDbModelId")]
-        public SpaceshipDbModel SpaceshipDbModel { get; set; }
+        public int? SpaceshipID { get; set; }
+        [ForeignKey("SpaceshipID")]
+        public SpaceshipModel Spaceship { get; set; }
 
         //Methods
-        public static async Task<ParkingSpaceDbModel> CreateModelFromDb(int id)
+        public static async Task<ParkingSpaceModel> CreateModelFromDb(int id)
         {
-            ParkingSpaceDbModel parkingSpace = null;
+            ParkingSpaceModel parkingSpace = null;
 
             using (var context = new SpaceParkContext())
             {
-                Console.WriteLine("Start Getparking...");
-
-                parkingSpace = await context.ParkingSpaceInfo.FindAsync(id);
-                if (parkingSpace.SpaceshipDbModelId.HasValue)
+                parkingSpace = await context.Parkingspace.FindAsync(id);
+                if (parkingSpace.SpaceshipID.HasValue)
                 {
-                    parkingSpace.SpaceshipDbModel = SpaceshipDbModel.CreateModelFromDb(parkingSpace.SpaceshipDbModelId.Value).Result;
+                    parkingSpace.Spaceship = SpaceshipModel.CreateModelFromDb(parkingSpace.SpaceshipID.Value).Result;
                 }
-
-                Console.WriteLine("Finished GetParking...");
             }
 
             return parkingSpace;
@@ -43,11 +39,11 @@ namespace SpacePort
         public ParkingSpace CreateObjectFromModel()
         {
             ParkingSpace temp = new ParkingSpace();
-            temp.SetID(this.ParkingSpaceDbModelId);
+            temp.SetID(this.ParkingSpaceID);
 
-            if (this.SpaceshipDbModel != null)
+            if (this.Spaceship != null)
             {
-                temp.OccupyingSpaceship = this.SpaceshipDbModel.CreateObjectFromModel();
+                temp.OccupyingSpaceship = this.Spaceship.CreateObjectFromModel();
             }
 
             return temp;            
