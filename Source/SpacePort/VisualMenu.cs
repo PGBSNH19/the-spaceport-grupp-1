@@ -121,7 +121,7 @@ namespace SpacePort
             if (isValid)
             {
                 string shipName = MenuOptions("Select your spaceship:", spaceships.Where(s => s.Owner == null).Select(s => s.Name).ToArray());
-                this.spaceship = SpaceshipModel.CreateModelFromDb(shipName).Result.CreateObjectFromModel();
+                this.spaceship = spaceships.Where(s => s.Owner == null && s.Name == shipName).First();
                 this.spaceship.Owner = this.person;
                 return isValid;
             }

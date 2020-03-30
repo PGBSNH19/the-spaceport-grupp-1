@@ -48,13 +48,16 @@ namespace SpacePort
             {
                 return;
             }
+            Person.AddPersonToDb(person);
             using(var context = new SpaceParkContext())
             {
-                spaceship.Owner = person;
                 ParkingSpace parkingSpace = parkingSpaces.Where(p => p.OccupyingSpaceship == null).FirstOrDefault();
                 parkingSpace.OccupyingSpaceship = spaceship;
                 var parkSpace = context.Parkingspace.Where(p => p.ParkingSpaceID == parkingSpace.ParkingSpaceID).First();
-                parkSpace.Spaceship = spaceship.ToDbModel();
+                var s = context.Spaceship.Where(s => s.SpaceshipID == spaceship.SpaceshipID).First();
+                var p = context.Person.Where(p => p.Name == person.Name).First();
+                p.Spaceship = s;
+                parkSpace.Spaceship = s;
                 
                 context.SaveChanges();
                 
@@ -74,7 +77,7 @@ namespace SpacePort
                 
                 context.SaveChanges();
                 Spaceship.DeleteSpaceshipFromDb(spaceship);
-                Person.DeletePersonFromDb(person);
+                //Person.DeletePersonFromDb(person);
                 return true;
             }
         }

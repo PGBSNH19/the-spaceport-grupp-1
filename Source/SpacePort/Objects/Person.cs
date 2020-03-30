@@ -82,7 +82,8 @@ namespace SpacePort
             using (var context = new SpaceParkContext())
             {
                 var p = context.Person.Single(a => a.Name == person.Name);
-                //context.Remove(p);
+               
+                context.Remove(p);
                 context.SaveChanges();
             }
         }

@@ -82,8 +82,9 @@ namespace SpacePort
         {
             using (var context = new SpaceParkContext())
             {
-                var s = context.Spaceship.Single(a => a.SpaceshipID == spaceship.SpaceshipID);
-                context.Remove(s);
+                var s = context.Spaceship.Single(s => s.SpaceshipID == spaceship.SpaceshipID);
+                s.Person = null;
+                context.Update(s);
                 context.SaveChanges();
             }
         }
