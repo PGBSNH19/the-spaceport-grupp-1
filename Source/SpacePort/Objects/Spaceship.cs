@@ -8,7 +8,7 @@ namespace SpacePort
 {
     public class Spaceship
     {
-        public int SpaceshipID { get; private set; }
+        public int SpaceshipID { get; set; }
         public string Name { get; set; }
         public double Length { get; set; }
         public Person Owner { get; set; }
@@ -73,7 +73,16 @@ namespace SpacePort
                 var spaceshipModel = context.Spaceship.Where(s => s.SpaceshipID == spaceship.SpaceshipID).First();
                 spaceshipModel.Person = person.ToDbModel();
                 context.SaveChanges();
+            }
+        }
 
+        public static void DeleteSpaceshipFromDb(Spaceship spaceship)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                var s = context.Spaceship.Single(a => a.SpaceshipID == spaceship.SpaceshipID);
+                context.Remove(s);
+                context.SaveChanges();
             }
         }
     }

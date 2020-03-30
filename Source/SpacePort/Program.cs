@@ -13,15 +13,13 @@ namespace SpacePort
     {
         static void Main(string[] args)
         {
-            //Testing area!
-            System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
-            
-            SpaceParkCorp spacePark = new SpaceParkCorp(new BankAccountComponent(), new ParkingService(4));
             string[] menuOptions = { "check in", "pay", "check out" };
+            SpaceParkCorp spacePark = new SpaceParkCorp(new BankAccountComponent(), new ParkingService(4));
             VisualMenu menu = new VisualMenu(spacePark, menuOptions);
 
             menu.Start();
         }
+<<<<<<< HEAD
 
         public static void AddSpaceShipsToDb()
         {
@@ -58,5 +56,7 @@ namespace SpacePort
         {
 
         }
+=======
+>>>>>>> e5199e2be449619d09a9aa2ec7e0d4ea51199bd9
     }
 }

@@ -50,7 +50,6 @@ namespace SpacePort
                 eventLog.Add(person.Wallet >= 100 ? "Person have enough money" : "Person dont have enough money");
                 Deposit(100);
                 person.Wallet -= 100;
-                Spaceship.AddSpaceShipToDb(spaceship, person);
                 parkingService.ParkSpaceship(person, spaceship);
                 this.hasPayed = true;
             }
@@ -62,11 +61,11 @@ namespace SpacePort
             return person.Wallet >= 100 && isCheckedIn;
         }
 
-        public bool CheckOut(Spaceship spaceship, List<string> eventLog)
+        public bool CheckOut(Spaceship spaceship, List<string> eventLog, Person person)
         {
             if (isCheckedIn && hasPayed)
             {
-                return parkingService.DepartSpaceShip(spaceship);
+                return parkingService.DepartSpaceShip(spaceship,person);
 
             }
             eventLog.Add(isCheckedIn ? "" : "You have not checked in yet");
@@ -74,9 +73,13 @@ namespace SpacePort
             return isCheckedIn && hasPayed;
         }
 
+        public bool FreeParkingSpace()
+        {
+
+            return parkingService.FreeParkingSpace();
+        }
 
 
-        //Bank account methods
         public void Deposit(double amount)
         {
             bankAccount.Deposit(amount);
@@ -92,14 +95,7 @@ namespace SpacePort
             return bankAccount.CheckBalance();
         }
 
-        //Parking control methods
-
-
-        public bool FreeParkingSpace()
-        {
-
-            return parkingService.FreeParkingSpace();
-        }
+        
 
     }
 }

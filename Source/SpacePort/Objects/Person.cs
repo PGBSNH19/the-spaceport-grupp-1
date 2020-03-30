@@ -8,7 +8,7 @@ namespace SpacePort
 {
     public class Person
     {
-        public int ID { get; private set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public double Wallet { get; set; }
 
@@ -58,6 +58,16 @@ namespace SpacePort
             {
                 bool uniquePerson = context.Person.Where(p => p.Name == person.Name).FirstOrDefault() == null;
                 return uniquePerson;
+            }
+        }
+
+        public static void DeletePersonFromDb(Person person)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                var p = context.Person.Single(a => a.Name == person.Name);
+                //context.Remove(p);
+                context.SaveChanges();
             }
         }
     }
