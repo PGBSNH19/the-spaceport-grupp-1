@@ -52,8 +52,6 @@ namespace SpacePort
             return JsonConvert.DeserializeObject<SpaceshipData>(dataResponse.Result.Content);
         }
 
-        
-
         public SpaceshipData GetSpaceShip(string name)
         {
             var dataResponse = GetSpaceshipResponse(name);
@@ -74,6 +72,13 @@ namespace SpacePort
             var dataResponse = GetPersonResponse(name);
             var data = JsonConvert.DeserializeObject<PersonDataResults>(dataResponse.Result.Content);
             return data.results[0];
+        }
+
+        public PersonDataResults GetPeople(string name)
+        {
+            var dataResponse = GetPersonResponse(name);
+            var data = JsonConvert.DeserializeObject<PersonDataResults>(dataResponse.Result.Content);
+            return data;
         }
     }
 }

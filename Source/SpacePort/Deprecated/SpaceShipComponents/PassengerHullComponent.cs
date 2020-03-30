@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SpacePort
 {
     public class PassengerHullComponent : HullComponent
     {
+        public int PassengerComponentID { get; set; }
         public List<Person> Passengers { get; private set; } = new List<Person>();
         public int Capacity { get; private set; }
 

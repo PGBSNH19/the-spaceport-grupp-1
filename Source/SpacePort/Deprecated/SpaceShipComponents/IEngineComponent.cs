@@ -8,6 +8,6 @@ namespace SpacePort
     {
         void Start();
         void Stop();
-        bool IsRunning();
+        bool GetIsRunning();
     }
 }

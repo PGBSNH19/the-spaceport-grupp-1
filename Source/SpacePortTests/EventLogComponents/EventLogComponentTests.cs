@@ -1,33 +1,33 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SpacePort;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using SpacePort;
+//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace SpacePort.Tests
-{
-    [TestClass()]
-    public class EventLogComponentTests
-    {
-        [TestMethod()]
-        public void GetLogTest()
-        {
-            EventLogComponent eLog = new EventLogComponent();
-            List<string> logCopy;
+//namespace SpacePort.Tests
+//{
+//    [TestClass()]
+//    public class EventLogComponentTests
+//    {
+//        [TestMethod()]
+//        public void GetLogTest()
+//        {
+//            EventLogComponent eLog = new EventLogComponent();
+//            List<string> logCopy;
 
-            logCopy = eLog.GetEventLog();
+//            logCopy = eLog.GetEventLog();
 
-            Assert.IsNotNull(logCopy);
-        }
+//            Assert.IsNotNull(logCopy);
+//        }
 
-        [TestMethod()]
-        public void WriteToLogTest_AddEntry_GetEntry()
-        {
-            string entry = "testdata";
-            EventLogComponent eventLog = new EventLogComponent();
-            eventLog.WriteToEventLog(entry);
+//        [TestMethod()]
+//        public void WriteToLogTest_AddEntry_GetEntry()
+//        {
+//            string entry = "testdata";
+//            EventLogComponent eventLog = new EventLogComponent();
+//            eventLog.WriteToEventLog(entry);
 
-            Assert.AreEqual(entry, eventLog.GetEventLog()[0]);
-        }
-    }
-}
+//            Assert.AreEqual(entry, eventLog.GetEventLog()[0]);
+//        }
+//    }
+//}

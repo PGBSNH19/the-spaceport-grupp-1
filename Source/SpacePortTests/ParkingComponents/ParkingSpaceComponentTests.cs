@@ -1,47 +1,47 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SpacePort;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using SpacePort;
+//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace SpacePort.Tests
-{
-    [TestClass()]
-    public class ParkingSpaceComponentTests
-    {
-        [TestMethod()]
-        public void ParkTest_IsOccupiedSetsToTrue_True()
-        {
-            ParkingSpaceComponent parking = new ParkingSpaceComponent();
+//namespace SpacePort.Tests
+//{
+//    [TestClass()]
+//    public class ParkingSpaceComponentTests
+//    {
+//        [TestMethod()]
+//        public void ParkTest_IsOccupiedSetsToTrue_True()
+//        {
+//            ParkingSpaceModel parking = new ParkingSpaceModel();
 
-            parking.Park();
+//            parking.Park();
 
-            Assert.IsTrue(parking.IsOccupied());
-        }
+//            Assert.IsTrue(parking.IsOccupied());
+//        }
 
-        [TestMethod()]
-        public void ParkTest_IsOccupiedSetsToFalse_False()
-        {
-            ParkingSpaceComponent parking = new ParkingSpaceComponent();
+//        [TestMethod()]
+//        public void ParkTest_IsOccupiedSetsToFalse_False()
+//        {
+//            ParkingSpaceModel parking = new ParkingSpaceModel();
 
-            parking.Depart();
+//            parking.Depart();
 
-            Assert.IsFalse(parking.IsOccupied());
-        }
+//            Assert.IsFalse(parking.IsOccupied());
+//        }
 
 
-        [TestMethod()]
-        public void ParkTest_IsOccupiedStatus_()
-        {
-            ParkingSpaceComponent parking = new ParkingSpaceComponent();
+//        [TestMethod()]
+//        public void ParkTest_IsOccupiedStatus_()
+//        {
+//            ParkingSpaceModel parking = new ParkingSpaceModel();
 
            
 
-            Assert.IsNotNull(parking.IsOccupied());
-        }
+//            Assert.IsNotNull(parking.IsOccupied());
+//        }
 
 
 
 
-    }
-}
+//    }
+//}
